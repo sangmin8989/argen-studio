@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="아르젠 디자인 — 수원·화성 프리미엄 인테리어 리모델링 전문" />
+  <title>ARGEN DESIGN — 프리미엄 인테리어</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="lang-ko">
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#" class="nav-logo">
+        <span class="logo-mark">A</span>
+        <span class="logo-text">RGEN DESIGN</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#services" class="nav-link" data-ko="서비스" data-en="Services">서비스</a></li>
+        <li><a href="#portfolio" class="nav-link" data-ko="포트폴리오" data-en="Portfolio">포트폴리오</a></li>
+        <li><a href="#process" class="nav-link" data-ko="프로세스" data-en="Process">프로세스</a></li>
+        <li><a href="#contact" class="nav-link" data-ko="문의" data-en="Contact">문의</a></li>
+      </ul>
+
+      <div class="nav-right">
+        <button class="lang-toggle" id="langToggle" aria-label="언어 전환">
+          <span class="lang-ko-label">KO</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-en-label">EN</span>
+        </button>
+        <a href="#contact" class="nav-cta" data-ko="무료 견적" data-en="Free Quote">무료 견적</a>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="메뉴 열기">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <ul class="mobile-nav-links">
+      <li><a href="#services" class="mobile-link" data-ko="서비스" data-en="Services">서비스</a></li>
+      <li><a href="#portfolio" class="mobile-link" data-ko="포트폴리오" data-en="Portfolio">포트폴리오</a></li>
+      <li><a href="#process" class="mobile-link" data-ko="프로세스" data-en="Process">프로세스</a></li>
+      <li><a href="#contact" class="mobile-link" data-ko="문의" data-en="Contact">문의</a></li>
+    </ul>
+    <div class="mobile-menu-footer">
+      <button class="lang-toggle mobile-lang" id="mobileLangToggle">
+        <span class="lang-ko-label">한국어</span>
+        <span class="lang-divider"> / </span>
+        <span class="lang-en-label">English</span>
+      </button>
+      <a href="#contact" class="btn btn-primary mobile-cta" data-ko="무료 견적 받기" data-en="Get Free Quote">무료 견적 받기</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <video class="hero-video" autoplay muted loop playsinline id="heroVideo">
+      <source src="hero-video.mp4" type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span class="eyebrow-line"></span>
+        <span class="eyebrow-text" data-ko="프리미엄 인테리어" data-en="Premium Interior">프리미엄 인테리어</span>
+        <span class="eyebrow-line"></span>
+      </div>
+      <h1 class="hero-headline" data-ko="공간이 바뀌면<br>일상이 바뀝니다" data-en="Your Space.<br>Transformed.">공간이 바뀌면<br>일상이 바뀝니다</h1>
+      <p class="hero-subtitle" data-ko="투명한 견적 · 책임 시공 · 전문 디자인" data-en="Transparent Quotes · Responsible Construction · Expert Design">투명한 견적 · 책임 시공 · 전문 디자인</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary" data-ko="무료 견적 받기" data-en="Get Free Quote">무료 견적 받기</a>
+        <a href="#portfolio" class="btn btn-outline" data-ko="포트폴리오 보기" data-en="View Portfolio">포트폴리오 보기</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span class="scroll-label" data-ko="스크롤" data-en="Scroll">스크롤</span>
+      <div class="scroll-line">
+        <div class="scroll-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST METRICS -->
+  <section class="trust-metrics">
+    <div class="metrics-grid">
+      <div class="metric-item reveal">
+        <div class="metric-number">
+          <span class="counter" data-target="847">0</span>
+          <span class="metric-suffix">+</span>
+        </div>
+        <div class="metric-label" data-ko="시공 완료" data-en="Projects Completed">시공 완료</div>
+      </div>
+      <div class="metric-item reveal reveal-delay-1">
+        <div class="metric-number">
+          <span class="counter" data-target="94">0</span>
+          <span class="metric-suffix">%</span>
+        </div>
+        <div class="metric-label" data-ko="재계약율" data-en="Client Retention">재계약율</div>
+      </div>
+      <div class="metric-item reveal reveal-delay-2">
+        <div class="metric-number">
+          <span class="counter" data-target="12">0</span>
+          <span class="metric-suffix" data-ko="년" data-en="yrs">년</span>
+        </div>
+        <div class="metric-label" data-ko="업력" data-en="Experience">업력</div>
+      </div>
+      <div class="metric-item reveal reveal-delay-3">
+        <div class="metric-number">
+          <span class="counter" data-target="100">0</span>
+          <span class="metric-suffix">%</span>
+        </div>
+        <div class="metric-label" data-ko="고객 만족도" data-en="Satisfaction">고객 만족도</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="services-header">
+      <div class="container">
+        <div class="section-header section-header--light">
+          <span class="section-label" data-ko="서비스" data-en="Services">서비스</span>
+          <h2 class="section-title" data-ko="전문 분야" data-en="Our Expertise">전문 분야</h2>
+          <p class="section-subtitle" data-ko="공간의 특성과 용도에 맞는 맞춤형 리모델링" data-en="Custom remodeling tailored to space characteristics">공간의 특성과 용도에 맞는 맞춤형 리모델링</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-row reveal">
+      <div class="service-row-inner">
+        <div class="service-info">
+          <span class="service-num">01</span>
+          <div class="service-text">
+            <h3 class="service-name" data-ko="아파트 인테리어" data-en="Apartment Interior">아파트 인테리어</h3>
+            <p class="service-desc" data-ko="신축 및 구축 아파트의 공간 재구성. 가족 구성과 라이프스타일에 맞춘 실용적이고 세련된 주거 공간을 완성합니다." data-en="Space reconfiguration for new and existing apartments. Creating practical and refined living spaces tailored to family needs.">신축 및 구축 아파트의 공간 재구성. 가족 구성과 라이프스타일에 맞춘 실용적이고 세련된 주거 공간을 완성합니다.</p>
+            <a href="#portfolio" class="service-link" data-ko="프로젝트 보기" data-en="View Projects">프로젝트 보기 →</a>
+          </div>
+        </div>
+        <div class="service-image-wrap">
+          <div class="service-image" style="background-image: url('images/service-apartment.jpg');"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-row service-row-reverse reveal">
+      <div class="service-row-inner">
+        <div class="service-info">
+          <span class="service-num">02</span>
+          <div class="service-text">
+            <h3 class="service-name" data-ko="상업 공간" data-en="Commercial Space">상업 공간</h3>
+            <p class="service-desc" data-ko="카페, 클리닉, 오피스 등 브랜드 정체성이 드러나는 상업 공간. 고객 경험과 운영 효율을 동시에 고려한 전문 설계입니다." data-en="Commercial spaces including cafes, clinics, and offices. Professional design considering both customer experience and operational efficiency.">카페, 클리닉, 오피스 등 브랜드 정체성이 드러나는 상업 공간. 고객 경험과 운영 효율을 동시에 고려한 전문 설계입니다.</p>
+            <a href="#portfolio" class="service-link" data-ko="프로젝트 보기" data-en="View Projects">프로젝트 보기 →</a>
+          </div>
+        </div>
+        <div class="service-image-wrap">
+          <div class="service-image" style="background-image: url('images/service-commercial.jpg');"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="service-row reveal">
+      <div class="service-row-inner">
+        <div class="service-info">
+          <span class="service-num">03</span>
+          <div class="service-text">
+            <h3 class="service-name" data-ko="교회 인테리어" data-en="Church Interior">교회 인테리어</h3>
+            <p class="service-desc" data-ko="예배 공간의 숭고함과 현대적 감각의 조화. 음향, 조명, 동선을 종합적으로 설계하여 경건하고 편안한 공간을 만듭니다." data-en="Harmonizing sacredness with modern sensibility. Comprehensive design of acoustics, lighting, and flow for a reverent and comfortable space.">예배 공간의 숭고함과 현대적 감각의 조화. 음향, 조명, 동선을 종합적으로 설계하여 경건하고 편안한 공간을 만듭니다.</p>
+            <a href="#portfolio" class="service-link" data-ko="프로젝트 보기" data-en="View Projects">프로젝트 보기 →</a>
+          </div>
+        </div>
+        <div class="service-image-wrap">
+          <div class="service-image" style="background-image: url('images/service-church.jpg');"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="process" id="process">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label" data-ko="프로세스" data-en="Process">프로세스</span>
+        <h2 class="section-title" data-ko="투명한 6단계 시공" data-en="Transparent 6-Step Process">투명한 6단계 시공</h2>
+        <p class="section-subtitle" data-ko="체계적인 프로세스로 안심하고 맡기실 수 있습니다" data-en="Trust our systematic process for peace of mind">체계적인 프로세스로 안심하고 맡기실 수 있습니다</p>
+      </div>
+
+      <div class="process-grid">
+        <div class="process-card reveal">
+          <div class="process-bg-num">01</div>
+          <div class="process-card-inner">
+            <span class="process-step-num">STEP 01</span>
+            <h3 class="process-step-title" data-ko="상담 및 견적" data-en="Consultation">상담 및 견적</h3>
+            <p class="process-step-desc" data-ko="고객의 요구사항과 예산을 파악하고 현장 상황을 고려한 1차 견적을 제공합니다." data-en="Understanding client needs and budget, providing initial quote based on site conditions.">고객의 요구사항과 예산을 파악하고 현장 상황을 고려한 1차 견적을 제공합니다.</p>
+          </div>
+        </div>
+
+        <div class="process-card reveal reveal-delay-1">
+          <div class="process-bg-num">02</div>
+          <div class="process-card-inner">
+            <span class="process-step-num">STEP 02</span>
+            <h3 class="process-step-title" data-ko="현장 방문" data-en="Site Visit">현장 방문</h3>
+            <p class="process-step-desc" data-ko="전문가가 직접 방문하여 실측하고 구조적 가능성을 검토합니다." data-en="Expert on-site visit for measurement and structural feasibility assessment.">전문가가 직접 방문하여 실측하고 구조적 가능성을 검토합니다.</p>
+          </div>
+        </div>
+
+        <div class="process-card reveal reveal-delay-2">
+          <div class="process-bg-num">03</div>
+          <div class="process-card-inner">
+            <span class="process-step-num">STEP 03</span>
+            <h3 class="process-step-title" data-ko="설계·제안" data-en="Design Proposal">설계·제안</h3>
+            <p class="process-step-desc" data-ko="3D 도면과 자재 샘플을 통해 완성될 공간을 미리 확인할 수 있습니다." data-en="Preview your space through 3D drawings and material samples.">3D 도면과 자재 샘플을 통해 완성될 공간을 미리 확인할 수 있습니다.</p>
+          </div>
+        </div>
+
+        <div class="process-card reveal reveal-delay-3">
+          <div class="process-bg-num">04</div>
+          <div class="process-card-inner">
+            <span class="process-step-num">STEP 04</span>
+            <h3 class="process-step-title" data-ko="계약·확정" data-en="Contract">계약·확정</h3>
+            <p class="process-step-desc" data-ko="상세 견적서와 일정표를 확정하고 계약을 진행합니다." data-en="Finalize detailed quote and schedule, proceed with contract.">상세 견적서와 일정표를 확정하고 계약을 진행합니다.</p>
+          </div>
+        </div>
+
+        <div class="process-card reveal reveal-delay-4">
+          <div class="process-bg-num">05</div>
+          <div class="process-card-inner">
+            <span class="process-step-num">STEP 05</span>
+            <h3 class="process-step-title" data-ko="시공" data-en="Construction">시공</h3>
+            <p class="process-step-desc" data-ko="자체 시공팀이 책임지고 진행하며, 실시간으로 진행 상황을 공유합니다." data-en="In-house team manages construction, sharing real-time progress updates.">자체 시공팀이 책임지고 진행하며, 실시간으로 진행 상황을 공유합니다.</p>
+          </div>
+        </div>
+
+        <div class="process-card reveal">
+          <div class="process-bg-num">06</div>
+          <div class="process-card-inner">
+            <span class="process-step-num">STEP 06</span>
+            <h3 class="process-step-title" data-ko="A/S·관리" data-en="After Service">A/S·관리</h3>
+            <p class="process-step-desc" data-ko="시공 후 1년간 무상 A/S와 지속적인 공간 관리 서비스를 제공합니다." data-en="1-year free after service and continuous space management support.">시공 후 1년간 무상 A/S와 지속적인 공간 관리 서비스를 제공합니다.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO -->
+  <section class="portfolio" id="portfolio">
+    <div class="container">
+      <div class="section-header section-header--light">
+        <span class="section-label" data-ko="포트폴리오" data-en="Portfolio">포트폴리오</span>
+        <h2 class="section-title" data-ko="완성된 공간들" data-en="Completed Projects">완성된 공간들</h2>
+      </div>
+
+      <div class="portfolio-filters">
+        <button class="filter-btn active" data-filter="all" data-ko="전체" data-en="All">전체</button>
+        <button class="filter-btn" data-filter="apartment" data-ko="아파트" data-en="Apartment">아파트</button>
+        <button class="filter-btn" data-filter="commercial" data-ko="상업공간" data-en="Commercial">상업공간</button>
+        <button class="filter-btn" data-filter="church" data-ko="교회" data-en="Church">교회</button>
+      </div>
+
+      <div class="portfolio-grid">
+        <div class="portfolio-item portfolio-item--large" data-category="apartment">
+          <div class="portfolio-image" style="background-image: url('images/portfolio-1.jpg');"></div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-category" data-ko="아파트" data-en="Apartment">아파트</div>
+            <div class="portfolio-name" data-ko="광교 힐스테이트 42평" data-en="Gwanggyo 42py">광교 힐스테이트 42평</div>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-category="commercial">
+          <div class="portfolio-image" style="background-image: url('images/portfolio-2.jpg');"></div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-category" data-ko="상업공간" data-en="Commercial">상업공간</div>
+            <div class="portfolio-name" data-ko="성남 카페 OOO" data-en="Cafe OOO">성남 카페 OOO</div>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-category="apartment">
+          <div class="portfolio-image" style="background-image: url('images/portfolio-3.jpg');"></div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-category" data-ko="아파트" data-en="Apartment">아파트</div>
+            <div class="portfolio-name" data-ko="동탄 메타폴리스 35평" data-en="Dongtan 35py">동탄 메타폴리스 35평</div>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-category="church">
+          <div class="portfolio-image" style="background-image: url('images/portfolio-4.jpg');"></div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-category" data-ko="교회" data-en="Church">교회</div>
+            <div class="portfolio-name" data-ko="OO교회 예배실" data-en="Church Sanctuary">OO교회 예배실</div>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-category="commercial">
+          <div class="portfolio-image" style="background-image: url('images/portfolio-5.jpg');"></div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-category" data-ko="상업공간" data-en="Commercial">상업공간</div>
+            <div class="portfolio-name" data-ko="수원 치과 클리닉" data-en="Dental Clinic">수원 치과 클리닉</div>
+          </div>
+        </div>
+
+        <div class="portfolio-item" data-category="apartment">
+          <div class="portfolio-image" style="background-image: url('images/portfolio-6.jpg');"></div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-category" data-ko="아파트" data-en="Apartment">아파트</div>
+            <div class="portfolio-name" data-ko="화성 동탄 2지구 50평" data-en="Hwaseong 50py">화성 동탄 2지구 50평</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE STRUCTURE -->
+  <section class="quote-structure">
+    <div class="container">
+      <div class="section-header section-header--light">
+        <span class="section-label" data-ko="견적 구조" data-en="Quote Structure">견적 구조</span>
+        <h2 class="section-title" data-ko="투명한 견적 구성" data-en="Transparent Pricing">투명한 견적 구성</h2>
+        <p class="section-subtitle" data-ko="숨김 없는 명확한 비용 안내" data-en="Clear cost breakdown with no hidden fees">숨김 없는 명확한 비용 안내</p>
+      </div>
+
+      <div class="quote-bars">
+        <div class="quote-bar-item reveal">
+          <div class="quote-bar-header">
+            <span class="quote-bar-label" data-ko="자재비" data-en="Materials">자재비</span>
+            <span class="quote-bar-percent">45%</span>
+          </div>
+          <div class="quote-bar-track">
+            <div class="quote-bar-fill" data-width="45"></div>
+          </div>
+          <p class="quote-bar-desc" data-ko="마루, 벽지, 조명, 주방 가구 등 A/S가 가능한 정품 자재만 사용합니다." data-en="Only genuine materials with warranty - flooring, wallpaper, lighting, kitchen cabinets.">마루, 벽지, 조명, 주방 가구 등 A/S가 가능한 정품 자재만 사용합니다.</p>
+        </div>
+
+        <div class="quote-bar-item reveal reveal-delay-1">
+          <div class="quote-bar-header">
+            <span class="quote-bar-label" data-ko="인건비" data-en="Labor">인건비</span>
+            <span class="quote-bar-percent">30%</span>
+          </div>
+          <div class="quote-bar-track">
+            <div class="quote-bar-fill" data-width="30"></div>
+          </div>
+          <p class="quote-bar-desc" data-ko="숙련된 자체 시공팀의 인건비. 외주가 아닌 직영 시공으로 품질을 보장합니다." data-en="Skilled in-house construction team. Quality guaranteed through direct management, not outsourcing.">숙련된 자체 시공팀의 인건비. 외주가 아닌 직영 시공으로 품질을 보장합니다.</p>
+        </div>
+
+        <div class="quote-bar-item reveal reveal-delay-2">
+          <div class="quote-bar-header">
+            <span class="quote-bar-label" data-ko="설계·관리비" data-en="Design & Management">설계·관리비</span>
+            <span class="quote-bar-percent">15%</span>
+          </div>
+          <div class="quote-bar-track">
+            <div class="quote-bar-fill" data-width="15"></div>
+          </div>
+          <p class="quote-bar-desc" data-ko="3D 설계, 현장 감리, 공정 관리 등 전문 인력의 기술료입니다." data-en="3D design, site supervision, project management by professional staff.">3D 설계, 현장 감리, 공정 관리 등 전문 인력의 기술료입니다.</p>
+        </div>
+
+        <div class="quote-bar-item reveal reveal-delay-3">
+          <div class="quote-bar-header">
+            <span class="quote-bar-label" data-ko="기타" data-en="Miscellaneous">기타</span>
+            <span class="quote-bar-percent">10%</span>
+          </div>
+          <div class="quote-bar-track">
+            <div class="quote-bar-fill" data-width="10"></div>
+          </div>
+          <p class="quote-bar-desc" data-ko="폐기물 처리, 양중비, 보험료 등 필수 부대 비용입니다." data-en="Essential expenses including waste disposal, hoisting, insurance.">폐기물 처리, 양중비, 보험료 등 필수 부대 비용입니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner" id="contact">
+    <div class="cta-watermark">ARGEN</div>
+    <div class="container">
+      <div class="cta-content">
+        <span class="cta-label" data-ko="무료 상담" data-en="Free Consultation">무료 상담</span>
+        <h2 class="cta-headline" data-ko="지금 무료 견적을<br>받아보세요" data-en="Get Your Free<br>Quote Today">지금 무료 견적을<br>받아보세요</h2>
+        <p class="cta-subtext" data-ko="전화 또는 카카오톡으로 간편하게 상담하실 수 있습니다." data-en="Easy consultation via phone or KakaoTalk.">전화 또는 카카오톡으로 간편하게 상담하실 수 있습니다.</p>
+        <div class="cta-buttons">
+          <a href="tel:031-123-4567" class="btn btn-dark" data-ko="전화 상담 (031-123-4567)" data-en="Call (031-123-4567)">전화 상담 (031-123-4567)</a>
+          <a href="https://pf.kakao.com/" target="_blank" rel="noopener" class="btn btn-kakao">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor">
+              <path d="M9 0C4.03 0 0 3.34 0 7.47c0 2.63 1.73 4.94 4.34 6.24-.18.66-.46 1.68-.52 1.95-.08.35.13.35.27.25.11-.07 1.72-1.14 2.38-1.58.51.07 1.03.11 1.56.11 4.97 0 9-3.34 9-7.47S13.97 0 9 0z"/>
+            </svg>
+            <span data-ko="카카오톡 상담" data-en="KakaoTalk">카카오톡 상담</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#" class="footer-logo">
+            <span class="logo-mark">A</span>
+            <span class="logo-text">RGEN DESIGN</span>
+          </a>
+          <p class="footer-tagline" data-ko="프리미엄 인테리어 전문" data-en="Premium Interior Specialist">프리미엄 인테리어 전문</p>
+          <address class="footer-address">
+            <p data-ko="경기도 수원시 영통구 영통로 123" data-en="123 Yeongtong-ro, Yeongtong-gu, Suwon">경기도 수원시 영통구 영통로 123</p>
+            <p><a href="tel:031-123-4567">TEL. 031-123-4567</a></p>
+            <p><a href="mailto:info@argen.co.kr">info@argen.co.kr</a></p>
+            <p data-ko="사업자등록번호: 123-45-67890" data-en="Business No: 123-45-67890">사업자등록번호: 123-45-67890</p>
+          </address>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title" data-ko="빠른 링크" data-en="Quick Links">빠른 링크</h4>
+          <ul class="footer-links">
+            <li><a href="#services" data-ko="서비스" data-en="Services">서비스</a></li>
+            <li><a href="#portfolio" data-ko="포트폴리오" data-en="Portfolio">포트폴리오</a></li>
+            <li><a href="#process" data-ko="프로세스" data-en="Process">프로세스</a></li>
+            <li><a href="#contact" data-ko="문의하기" data-en="Contact">문의하기</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col-title" data-ko="언어" data-en="Language">언어</h4>
+          <div class="footer-lang">
+            <button class="footer-lang-btn active" data-lang="ko">한국어</button>
+            <button class="footer-lang-btn" data-lang="en">English</button>
+          </div>
+          <h4 class="footer-col-title" style="margin-top: 2rem;" data-ko="소셜" data-en="Social">소셜</h4>
+          <div class="sns-links">
+            <a href="#" class="sns-link" aria-label="Instagram">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+            <a href="#" class="sns-link" aria-label="Facebook">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a href="#" class="sns-link" aria-label="YouTube">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 ARGEN DESIGN. All rights reserved.</p>
+        <p class="footer-website">argen.co.kr</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

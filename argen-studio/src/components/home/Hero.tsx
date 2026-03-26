@@ -89,16 +89,29 @@ export default function Hero() {
           <span className="block h-[1px] w-10 bg-warm-300/60" />
         </motion.div>
 
-        {/* Headline */}
-        <motion.h1
-          className="font-serif text-[clamp(2.2rem,5.5vw,5rem)] font-bold text-warm-50 leading-[1.05] mb-6"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ type: 'spring', stiffness: 60, damping: 18, delay: 0.4 }}
-        >
-          {t(dict['hero.headline1'].ko, dict['hero.headline1'].en)}<br />
-          {t(dict['hero.headline2'].ko, dict['hero.headline2'].en)}
-        </motion.h1>
+        {/* Headline — character-by-character reveal */}
+        <h1 className="font-serif text-[clamp(2.2rem,5.5vw,5rem)] font-bold text-warm-50 leading-[1.05] mb-6">
+          {[t(dict['hero.headline1'].ko, dict['hero.headline1'].en), '\n', t(dict['hero.headline2'].ko, dict['hero.headline2'].en)].map((segment, si) => {
+            if (segment === '\n') return <br key={`br-${si}`} />;
+            const offset = si === 0 ? 0 : t(dict['hero.headline1'].ko, dict['hero.headline1'].en).length;
+            return segment.split('').map((char, ci) => (
+              <motion.span
+                key={`${si}-${ci}`}
+                className="inline-block"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 100,
+                  damping: 20,
+                  delay: 0.6 + (offset + ci) * 0.04,
+                }}
+              >
+                {char === ' ' ? '\u00A0' : char}
+              </motion.span>
+            ));
+          })}
+        </h1>
 
         {/* Subtitle */}
         <motion.p

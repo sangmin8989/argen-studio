@@ -23,7 +23,7 @@ export default function Footer() {
           <div>
             <div className="flex items-baseline gap-0.5 mb-4">
               <span className="font-serif text-2xl font-bold text-accent">A</span>
-              <span className="font-sans text-sm font-medium tracking-[0.18em] uppercase text-warm-200">RGEN DESIGN</span>
+              <span className="font-sans text-sm font-medium tracking-[0.18em] uppercase text-warm-200">RGEN STUDIO</span>
             </div>
             <p className="font-sans text-sm leading-relaxed text-warm-400 max-w-xs">
               {t(dict['footer.desc1'].ko, dict['footer.desc1'].en)}<br />
@@ -77,7 +77,7 @@ export default function Footer() {
 
         <div className="pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <p className="font-sans text-xs text-warm-600">
-            © {year} ARGEN DESIGN. All rights reserved.
+            © {year} ARGEN STUDIO. All rights reserved.
           </p>
           <a href="https://argen.co.kr" className="font-sans text-xs text-warm-600 hover:text-warm-400 transition-colors">
             argen.co.kr

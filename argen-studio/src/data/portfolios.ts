@@ -2,7 +2,7 @@
 // 아르젠 스튜디오 포트폴리오 데이터
 // Claude Code에서 Next.js 프로젝트에 바로 복사해서 사용
 
-export type PortfolioCategory = 'apartment' | 'commercial' | 'church';
+export type PortfolioCategory = 'commercial' | 'exterior' | 'church';
 
 export interface PortfolioProject {
   slug: string;
@@ -15,13 +15,14 @@ export interface PortfolioProject {
   imageCount: number;
   featured: boolean;
   completedAt: string;
+  cardImageIndex?: number; // 카드 썸네일에 사용할 이미지 번호 (기본: 1)
 }
 
 // 카테고리 라벨
 export const categoryLabels: Record<PortfolioCategory | 'all', string> = {
   all: '전체',
-  apartment: '아파트',
   commercial: '상업공간',
+  exterior: '건물 외장',
   church: '교회',
 };
 
@@ -36,6 +37,7 @@ export const portfolios: PortfolioProject[] = [
     imageCount: 15,
     featured: true,
     completedAt: '2023-05',
+    cardImageIndex: 3,
   },
   {
     slug: 'titanium22-office',
@@ -58,6 +60,7 @@ export const portfolios: PortfolioProject[] = [
     imageCount: 16,
     featured: true,
     completedAt: '2026-02',
+    cardImageIndex: 10,
   },
   {
     slug: 'sushiichi-seolleung',
@@ -69,6 +72,7 @@ export const portfolios: PortfolioProject[] = [
     imageCount: 12,
     featured: true,
     completedAt: '2025-11',
+    cardImageIndex: 2,
   },
   {
     slug: 'sushiichi-pangyo',
@@ -83,7 +87,7 @@ export const portfolios: PortfolioProject[] = [
   },
   {
     slug: 'cheongwaok-exterior',
-    category: 'commercial',
+    category: 'exterior',
     title: { ko: '건물 파사드 리모델링', en: 'Building Facade Remodeling' },
     location: { ko: '서울 석촌호수', en: 'Seokchon Lake, Seoul' },
     year: 2024,

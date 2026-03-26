@@ -16,8 +16,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = portfolios.find((p) => p.slug === slug);
   if (!project) return {};
   return {
-    title: `${project.title.ko} — ARGEN DESIGN`,
-    description: project.description.ko || `${project.title.ko} - ARGEN DESIGN 시공 사례`,
+    title: `${project.title.ko} — ARGEN STUDIO`,
+    description: project.description.ko || `${project.title.ko} - ARGEN STUDIO 시공 사례`,
   };
 }
 

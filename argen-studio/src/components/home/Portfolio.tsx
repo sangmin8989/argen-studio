@@ -8,13 +8,13 @@ import { useLang } from '@/lib/i18n';
 import dict from '@/lib/dict';
 import { portfolios, getPortfolioImagePath, type PortfolioCategory } from '@/data/portfolios';
 
-const filters = ['all', 'apartment', 'commercial', 'church'] as const;
+const filters = ['all', 'commercial', 'exterior', 'church'] as const;
 type Filter = (typeof filters)[number];
 
 const filterKeys: Record<Filter, { ko: string; en: string }> = {
   all: dict['portfolio.all'],
-  apartment: dict['portfolio.apartment'],
   commercial: dict['portfolio.commercial'],
+  exterior: { ko: '건물 외장', en: 'Exterior' },
   church: dict['portfolio.church'],
 };
 
@@ -56,19 +56,6 @@ export default function Portfolio() {
           </p>
         </div>
 
-        <div className="flex justify-center gap-2 mb-12 reveal">
-          {filters.map((f) => (
-            <button
-              key={f}
-              onClick={() => setActive(f)}
-              className={`px-5 py-2 rounded-full font-sans text-sm font-medium transition-all duration-200 ${
-                active === f ? 'bg-accent text-warm-50' : 'bg-warm-200 text-warm-700 hover:bg-warm-300'
-              }`}
-            >
-              {t(filterKeys[f].ko, filterKeys[f].en)}
-            </button>
-          ))}
-        </div>
 
         {visible.length === 0 ? (
           <p className="text-center font-sans text-sm text-warm-500 py-20">
@@ -89,9 +76,9 @@ export default function Portfolio() {
                   data-cursor="view"
                   className="group block bg-warm-50 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow duration-500"
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden bg-warm-200">
+                  <div className="relative aspect-[3/2] overflow-hidden bg-warm-200">
                     <Image
-                      src={getPortfolioImagePath(project, 1, 'card')}
+                      src={getPortfolioImagePath(project, project.cardImageIndex ?? 1, 'card')}
                       alt={project.title[lang]}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"

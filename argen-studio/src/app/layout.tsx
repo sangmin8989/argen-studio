@@ -5,6 +5,7 @@ import { I18nProvider } from '@/lib/i18n';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/PageTransition';
+import Preloader from '@/components/layout/Preloader';
 
 const playfair = Playfair_Display({
   variable: '--font-playfair',
@@ -22,14 +23,19 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'ARGEN DESIGN — 프리미엄 인테리어 리모델링',
-  description: '(주)아르젠 — 실제 시공 기준으로 견적과 공정을 정리하는 리모델링 파트너. 상업공간·교회 전문 시공.',
-  keywords: ['인테리어', '리모델링', '아파트 인테리어', '수원 인테리어', '화성 인테리어', '상업공간', '교회 인테리어'],
+  metadataBase: new URL('https://argen.co.kr'),
+  title: '아르젠 스튜디오 | 상업공간·건물외장·교회 인테리어 전문 시공',
+  description: '아르젠 스튜디오 — 화성·수원 기반 인테리어 전문 업체. 스크린골프장, 음식점, 사무실, 교회, 건물 외장 리모델링. 설계부터 시공·A/S까지 직영 운영.',
+  keywords: ['아르젠 스튜디오', '아르젠', '화성 인테리어', '동탄 인테리어', '수원 인테리어', '상업공간 인테리어', '교회 인테리어', '건물 외장 리모델링', '스크린골프장 인테리어', '사무실 인테리어'],
   openGraph: {
-    title: 'ARGEN DESIGN — 프리미엄 인테리어',
-    description: '공간이 바뀌면 일상이 바뀝니다',
+    title: '아르젠 스튜디오 | 상업공간·건물외장·교회 전문 시공',
+    description: '공간이 바뀌면 일상이 바뀝니다 — 화성·수원 인테리어 전문',
     locale: 'ko_KR',
     type: 'website',
+    siteName: '아르젠 스튜디오',
+  },
+  other: {
+    'naver-site-verification': '',
   },
 };
 
@@ -45,6 +51,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-warm-100 text-dark">
         <I18nProvider>
+          <Preloader />
           <Header />
           <main className="flex-1">
             <PageTransition>{children}</PageTransition>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useLang } from '@/lib/i18n';
 import dict from '@/lib/dict';
@@ -15,6 +16,8 @@ const navLinks = [
 
 export default function Header() {
   const { lang, toggle, t } = useLang();
+  const pathname = usePathname();
+  const isHome = pathname === '/';
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -40,6 +43,10 @@ export default function Header() {
   const scrollTo = (href: string) => {
     setMenuOpen(false);
     if (href === '#') return;
+    if (!isHome) {
+      window.location.href = '/' + href;
+      return;
+    }
     const el = document.querySelector(href);
     if (!el) return;
     const navH = 76;
@@ -70,7 +77,7 @@ export default function Header() {
               className="font-sans text-sm font-medium tracking-[0.18em] uppercase transition-colors"
               style={{ color: scrolled ? '#1A1A1A' : '#FAF8F5' }}
             >
-              RGEN DESIGN
+              RGEN STUDIO
             </span>
           </Link>
 
@@ -149,24 +156,24 @@ export default function Header() {
 
       {/* Mobile menu */}
       <div
-        className={`fixed inset-0 z-40 bg-warm-100 flex flex-col transition-transform duration-300 ease-out-expo ${
+        className={`fixed inset-0 z-40 bg-warm-100 flex flex-col justify-between transition-transform duration-300 ease-out-expo ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         style={{ paddingTop: 76 }}
       >
-        <ul className="flex flex-col px-8 pt-10 gap-2">
+        <ul className="flex flex-col px-8 pt-6 gap-1">
           {navLinks.map((link) => (
             <li key={link.href}>
               <button
                 onClick={() => scrollTo(link.href)}
-                className="w-full text-left font-serif text-3xl font-medium py-4 border-b border-warm-200 text-dark hover:text-accent transition-colors"
+                className="w-full text-center font-serif text-2xl font-medium py-3 border-b border-warm-200 text-dark hover:text-accent transition-colors"
               >
                 {t(dict[link.ko].ko, dict[link.ko].en)}
               </button>
             </li>
           ))}
         </ul>
-        <div className="px-8 pt-8 flex flex-col gap-4">
+        <div className="px-8 pb-10 flex flex-col items-center gap-4">
           <button
             onClick={toggle}
             className="font-sans text-sm font-medium text-warm-600"

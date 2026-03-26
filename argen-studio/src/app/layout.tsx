@@ -4,6 +4,7 @@ import './globals.css';
 import { I18nProvider } from '@/lib/i18n';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import PageTransition from '@/components/PageTransition';
 
 const playfair = Playfair_Display({
   variable: '--font-playfair',
@@ -45,7 +46,9 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-warm-100 text-dark">
         <I18nProvider>
           <Header />
-          <main className="flex-1">{children}</main>
+          <main className="flex-1">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer />
         </I18nProvider>
       </body>

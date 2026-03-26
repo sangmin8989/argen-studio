@@ -47,7 +47,7 @@ export default function Pricing() {
             <span className="inline-block font-sans text-xs font-medium tracking-[0.2em] uppercase text-accent mb-4">
               {t(dict['pricing.label'].ko, dict['pricing.label'].en)}
             </span>
-            <h2 className="font-serif text-[clamp(2rem,4.5vw,3.5rem)] font-bold text-warm-100 mb-4">
+            <h2 className="font-serif text-[clamp(1.75rem,3.5vw,3rem)] font-bold text-warm-100 mb-4">
               {t(dict['pricing.title1'].ko, dict['pricing.title1'].en)}<br />
               {t(dict['pricing.title2'].ko, dict['pricing.title2'].en)}
             </h2>

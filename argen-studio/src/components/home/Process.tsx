@@ -18,18 +18,18 @@ export default function Process() {
   return (
     <section id="process" className="py-[clamp(5rem,10vw,9rem)] bg-warm-200">
       <div className="max-w-[1320px] mx-auto px-[clamp(1.25rem,5vw,4rem)]">
-        <div className="text-center mb-16 reveal">
+        <div className="text-center mb-16 reveal px-4">
           <span className="inline-block font-sans text-xs font-medium tracking-[0.2em] uppercase text-accent mb-4">
             {t(dict['process.label'].ko, dict['process.label'].en)}
           </span>
-          <h2 className="font-serif text-[clamp(2rem,4.5vw,3.5rem)] font-bold text-dark mb-4">
+          <h2 className="font-serif text-[clamp(1.5rem,3vw,3rem)] font-bold text-dark mb-4">
             {t(dict['process.title'].ko, dict['process.title'].en)}
           </h2>
           <p className="font-sans text-sm text-warm-600 max-w-md mx-auto">
             {t(dict['process.subtitle'].ko, dict['process.subtitle'].en)}
           </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {steps.map((step, i) => (
             <div key={step.num} className={`relative bg-warm-50 rounded-lg p-8 overflow-hidden reveal reveal-delay-${i % 5}`}>
               <span className="absolute top-0 right-4 font-serif text-[6rem] font-bold text-warm-200 leading-none select-none pointer-events-none">{step.num}</span>

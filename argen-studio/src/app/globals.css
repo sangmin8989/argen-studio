@@ -28,6 +28,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
@@ -55,19 +56,96 @@ ul { list-style: none; padding: 0; margin: 0; }
 img, video { display: block; max-width: 100%; }
 button { cursor: pointer; font-family: inherit; border: none; background: none; }
 
-/* ── SCROLL REVEAL ───────────────────────────────────── */
+/* ── CINEMATIC SCROLL REVEAL ─────────────────────────── */
 .reveal {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(40px);
+  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
 }
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
-.reveal-delay-4 { transition-delay: 0.4s; }
-.reveal-delay-5 { transition-delay: 0.5s; }
+.reveal-delay-1 { transition-delay: 0.12s; }
+.reveal-delay-2 { transition-delay: 0.24s; }
+.reveal-delay-3 { transition-delay: 0.36s; }
+.reveal-delay-4 { transition-delay: 0.48s; }
+.reveal-delay-5 { transition-delay: 0.60s; }
+
+/* Image zoom-in on reveal */
+.reveal-image {
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-image.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ── CUSTOM CURSOR ──────────────────────────────────── */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background: #8C7560;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              height 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s ease,
+              opacity 0.3s ease;
+  mix-blend-mode: difference;
+  opacity: 0;
+}
+.cursor-dot.visible {
+  opacity: 1;
+}
+.cursor-dot.hovering {
+  width: 80px;
+  height: 80px;
+  background: rgba(140, 117, 96, 0.15);
+  backdrop-filter: blur(4px);
+  mix-blend-mode: normal;
+}
+.cursor-label {
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8C7560;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.cursor-label.visible {
+  opacity: 1;
+}
+
+/* ── PAGE TRANSITION ────────────────────────────────── */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.page-transition-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hide custom cursor on touch devices */
+@media (hover: none) {
+  .cursor-dot, .cursor-label { display: none !important; }
+}
+
+/* Korean text overflow fix */
+h1, h2, h3, p { word-break: keep-all; overflow-wrap: break-word; }

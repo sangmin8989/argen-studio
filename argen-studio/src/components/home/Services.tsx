@@ -20,7 +20,7 @@ export default function Services() {
           <span className="inline-block font-sans text-xs font-medium tracking-[0.2em] uppercase text-accent mb-4">
             {t(dict['services.label'].ko, dict['services.label'].en)}
           </span>
-          <h2 className="font-serif text-[clamp(2rem,4.5vw,3.5rem)] font-bold text-warm-100 mb-4">
+          <h2 className="font-serif text-[clamp(1.75rem,3.5vw,3rem)] font-bold text-warm-100 mb-4">
             {t(dict['services.title'].ko, dict['services.title'].en)}
           </h2>
           <p className="font-sans text-sm text-warm-400 max-w-md mx-auto">
@@ -31,7 +31,7 @@ export default function Services() {
       <div className="pt-[clamp(3rem,6vw,5rem)]">
         {services.map((svc, i) => (
           <div key={svc.num} className={`flex flex-col ${i % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} reveal`}>
-            <div className="relative w-full md:w-1/2 aspect-[4/3] md:aspect-auto md:min-h-[480px] overflow-hidden">
+            <div className="relative w-full md:w-1/2 aspect-[4/3] md:aspect-auto md:min-h-[480px] overflow-hidden reveal-image">
               <Image src={svc.image} alt={t(dict[svc.title].ko, dict[svc.title].en)} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 hover:scale-105" />
               <div className="absolute inset-0 bg-dark/20" />
             </div>

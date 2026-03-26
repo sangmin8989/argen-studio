@@ -1,12 +1,26 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useLang } from '@/lib/i18n';
 import dict from '@/lib/dict';
 
 export default function Hero() {
   const { t } = useLang();
   const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+
+  // Parallax: video moves slow, content moves fast, overlay darkens
+  const videoY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '80%']);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const overlayOpacity = useTransform(scrollYProgress, [0, 0.8], [0.5, 0.85]);
+  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -28,43 +42,106 @@ export default function Hero() {
   };
 
   return (
-    <section id="hero" className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
-      <video ref={videoRef} autoPlay muted loop playsInline className="absolute inset-0 w-full h-full object-cover">
-        <source src="/videos/hero-video.mp4" type="video/mp4" />
-      </video>
-      <div className="absolute inset-0 bg-dark/50" />
-      <div className="relative z-10 text-center px-6 max-w-3xl mx-auto">
-        <div className="flex items-center justify-center gap-4 mb-6">
+    <section
+      ref={sectionRef}
+      id="hero"
+      className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden"
+    >
+      {/* Video with parallax */}
+      <motion.div
+        className="absolute inset-[-15%]"
+        style={{ y: videoY, scale: videoScale }}
+      >
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src="/videos/hero-video.mp4" type="video/mp4" />
+        </video>
+      </motion.div>
+
+      {/* Overlay that darkens on scroll */}
+      <motion.div
+        className="absolute inset-0 bg-dark"
+        style={{ opacity: overlayOpacity }}
+      />
+
+      {/* Content with faster parallax */}
+      <motion.div
+        className="relative z-10 text-center px-6 max-w-3xl mx-auto"
+        style={{ y: contentY, opacity: contentOpacity }}
+      >
+        {/* Eyebrow */}
+        <motion.div
+          className="flex items-center justify-center gap-4 mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.2 }}
+        >
           <span className="block h-[1px] w-10 bg-warm-300/60" />
           <span className="font-sans text-xs font-medium tracking-[0.25em] uppercase text-warm-300">
             {t(dict['hero.eyebrow'].ko, dict['hero.eyebrow'].en)}
           </span>
           <span className="block h-[1px] w-10 bg-warm-300/60" />
-        </div>
-        <h1 className="font-serif text-[clamp(2.5rem,7vw,5rem)] font-bold text-warm-50 leading-[1.05] mb-6">
+        </motion.div>
+
+        {/* Headline */}
+        <motion.h1
+          className="font-serif text-[clamp(2.2rem,5.5vw,5rem)] font-bold text-warm-50 leading-[1.05] mb-6"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: 'spring', stiffness: 60, damping: 18, delay: 0.4 }}
+        >
           {t(dict['hero.headline1'].ko, dict['hero.headline1'].en)}<br />
           {t(dict['hero.headline2'].ko, dict['hero.headline2'].en)}
-        </h1>
-        <p className="font-sans text-[clamp(0.875rem,1.5vw,1.1rem)] text-warm-300 mb-10 tracking-wide">
+        </motion.h1>
+
+        {/* Subtitle */}
+        <motion.p
+          className="font-sans text-[clamp(0.875rem,1.5vw,1.1rem)] text-warm-300 mb-10 tracking-wide"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.7 }}
+        >
           {t(dict['hero.subtitle'].ko, dict['hero.subtitle'].en)}
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 justify-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 1.0 }}
+        >
           <button onClick={() => scrollTo('#contact')} className="px-8 py-4 bg-accent text-warm-50 font-sans font-medium text-sm tracking-wide rounded hover:bg-warm-700 transition-colors duration-200">
             {t(dict['hero.cta1'].ko, dict['hero.cta1'].en)}
           </button>
           <button onClick={() => scrollTo('#portfolio')} className="px-8 py-4 border border-warm-300/60 text-warm-100 font-sans font-medium text-sm tracking-wide rounded hover:bg-warm-100/10 transition-colors duration-200">
             {t(dict['hero.cta2'].ko, dict['hero.cta2'].en)}
           </button>
-        </div>
-      </div>
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2">
+        </motion.div>
+      </motion.div>
+
+      {/* Scroll indicator */}
+      <motion.div
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8, delay: 1.5 }}
+        style={{ opacity: contentOpacity }}
+      >
         <span className="font-sans text-[10px] tracking-[0.25em] uppercase text-warm-400">
           {t(dict['hero.scroll'].ko, dict['hero.scroll'].en)}
         </span>
         <div className="w-[1px] h-10 bg-warm-400/40 relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full bg-warm-300 animate-scroll-dot" style={{ height: '40%' }} />
         </div>
-      </div>
+      </motion.div>
+
       <style jsx>{`
         @keyframes scrollDot { 0% { transform: translateY(-100%); } 100% { transform: translateY(300%); } }
         .animate-scroll-dot { animation: scrollDot 1.8s ease-in-out infinite; }

@@ -24,6 +24,7 @@ const config: Config = {
         },
         accent: '#8C7560',
         dark:   '#1A1A1A',
+        terracotta: '#C0897B',
         charcoal: '#1C1917',
       },
       fontFamily: {

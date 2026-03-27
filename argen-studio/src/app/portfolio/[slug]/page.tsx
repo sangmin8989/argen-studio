@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
-import { portfolios, getPortfolioImagePath } from '@/data/portfolios';
+import { portfolios, getPortfolioImagePath, categoryLabels } from '@/data/portfolios';
 import PortfolioDetail from './PortfolioDetail';
 
 interface Props {
@@ -15,9 +15,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const project = portfolios.find((p) => p.slug === slug);
   if (!project) return {};
+
+  const title = project.title.ko;
+  const description = project.description.ko || `${title} — ${project.location.ko} ${categoryLabels[project.category]} 인테리어 시공 사례. 아르젠 스튜디오 포트폴리오.`;
+  const url = `https://argen.co.kr/portfolio/${project.slug}`;
+  const ogImage = getPortfolioImagePath(project, project.cardImageIndex ?? 1, 'og');
+
   return {
-    title: `${project.title.ko} — ARGEN STUDIO`,
-    description: project.description.ko || `${project.title.ko} - ARGEN STUDIO 시공 사례`,
+    title,
+    description,
+    openGraph: {
+      title: `${title} — ARGEN STUDIO`,
+      description,
+      url,
+      type: 'article',
+      images: [ogImage],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${title} — ARGEN STUDIO`,
+      description,
+      images: [ogImage],
+    },
+    alternates: {
+      canonical: url,
+    },
   };
 }
 
@@ -34,5 +56,32 @@ export default async function PortfolioDetailPage({ params }: Props) {
     getPortfolioImagePath(project, i + 1, 'hero')
   );
 
-  return <PortfolioDetail project={project} images={images} prev={prev} next={next} />;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CreativeWork',
+    name: project.title.ko,
+    description: project.description.ko || `${project.title.ko} 인테리어 시공 사례`,
+    url: `https://argen.co.kr/portfolio/${project.slug}`,
+    image: images.slice(0, 3).map((img) => `https://argen.co.kr${img}`),
+    creator: {
+      '@type': 'LocalBusiness',
+      name: '아르젠 스튜디오',
+      url: 'https://argen.co.kr',
+    },
+    locationCreated: {
+      '@type': 'Place',
+      name: project.location.ko,
+    },
+    dateCreated: project.completedAt,
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <PortfolioDetail project={project} images={images} prev={prev} next={next} />
+    </>
+  );
 }

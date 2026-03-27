@@ -7,7 +7,7 @@ import dict from '@/lib/dict';
 const services = [
   { num: '01', title: 'services.exterior' as const, desc: 'services.exteriorDesc' as const, image: '/images/portfolio/exterior/cheongwaok-exterior/hero/exterior-cheongwaok-exterior-05-hero.webp' },
   { num: '02', title: 'services.commercial' as const, desc: 'services.commercialDesc' as const, image: '/images/services/service-commercial.jpg' },
-  { num: '03', title: 'services.church' as const, desc: 'services.churchDesc' as const, image: '/images/services/service-church.jpg' },
+  { num: '03', title: 'services.hospital' as const, desc: 'services.hospitalDesc' as const, image: '/images/services/service-hospital-v2.jpg' },
 ];
 
 export default function Services() {

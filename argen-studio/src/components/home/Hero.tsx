@@ -1,13 +1,12 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useLang } from '@/lib/i18n';
 import dict from '@/lib/dict';
 
 export default function Hero() {
   const { t } = useLang();
-  const videoRef = useRef<HTMLVideoElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   const { scrollYProgress } = useScroll({
@@ -15,25 +14,8 @@ export default function Hero() {
     offset: ['start start', 'end start'],
   });
 
-  // Parallax: video moves slow, content moves fast, overlay darkens
-  const videoY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
   const contentY = useTransform(scrollYProgress, [0, 1], ['0%', '80%']);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-  const overlayOpacity = useTransform(scrollYProgress, [0, 0.8], [0.5, 0.85]);
-  const videoScale = useTransform(scrollYProgress, [0, 1], [1, 1.15]);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.play().catch(() => {
-      const resume = () => { video.play(); };
-      document.addEventListener('touchstart', resume, { once: true });
-      document.addEventListener('click', resume, { once: true });
-    });
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      video.pause();
-    }
-  }, []);
 
   const scrollTo = (href: string) => {
     const el = document.querySelector(href);
@@ -45,32 +27,18 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden"
+      className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-dark"
     >
-      {/* Video with parallax */}
-      <motion.div
-        className="absolute inset-[-15%]"
-        style={{ y: videoY, scale: videoScale }}
-      >
-        <video
-          ref={videoRef}
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="w-full h-full object-cover"
-        >
-          <source src="/videos/hero-video.mp4" type="video/mp4" />
-        </video>
-      </motion.div>
+      {/* Subtle background texture */}
+      <div className="absolute inset-0 opacity-[0.03]" style={{
+        backgroundImage: `radial-gradient(circle at 1px 1px, rgba(250,248,245,0.5) 1px, transparent 0)`,
+        backgroundSize: '40px 40px',
+      }} />
 
-      {/* Overlay that darkens on scroll */}
-      <motion.div
-        className="absolute inset-0 bg-dark"
-        style={{ opacity: overlayOpacity }}
-      />
+      {/* Warm glow accent */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-accent/[0.04] blur-[120px]" />
 
-      {/* Content with faster parallax */}
+      {/* Content */}
       <motion.div
         className="relative z-10 text-center px-6 max-w-3xl mx-auto"
         style={{ y: contentY, opacity: contentOpacity }}
@@ -89,38 +57,31 @@ export default function Hero() {
           <span className="block h-[1px] w-10 bg-warm-300/60" />
         </motion.div>
 
-        {/* Headline — character-by-character reveal */}
-        <h1 className="font-serif text-[clamp(2.2rem,5.5vw,5rem)] font-bold text-warm-50 leading-[1.05] mb-6">
-          {[t(dict['hero.headline1'].ko, dict['hero.headline1'].en), '\n', t(dict['hero.headline2'].ko, dict['hero.headline2'].en)].map((segment, si) => {
-            if (segment === '\n') return <br key={`br-${si}`} />;
-            const offset = si === 0 ? 0 : t(dict['hero.headline1'].ko, dict['hero.headline1'].en).length;
-            return segment.split('').map((char, ci) => (
-              <motion.span
-                key={`${si}-${ci}`}
-                className="inline-block"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{
-                  type: 'spring',
-                  stiffness: 100,
-                  damping: 20,
-                  delay: 0.6 + (offset + ci) * 0.04,
-                }}
-              >
-                {char === ' ' ? '\u00A0' : char}
-              </motion.span>
-            ));
-          })}
-        </h1>
+        {/* Headline — ARtistic GENesis */}
+        <motion.div
+          className="mb-4 flex flex-col items-center"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.5 }}
+        >
+          <h1 className="leading-[1] flex items-baseline">
+            <span className="font-sans text-[clamp(2.8rem,7vw,5.5rem)] font-medium tracking-[0.02em] text-accent">AR</span>
+            <span className="font-sans text-[clamp(1rem,2.5vw,1.8rem)] font-medium tracking-[0.18em] text-warm-100">tistic</span>
+          </h1>
+          <h1 className="leading-[1] flex items-baseline mt-1">
+            <span className="font-sans text-[clamp(2.5rem,6.2vw,4.8rem)] font-medium tracking-[0.02em] text-accent">GEN</span>
+            <span className="font-sans text-[clamp(1rem,2.5vw,1.8rem)] font-medium tracking-[0.18em] text-warm-100">esis</span>
+          </h1>
+        </motion.div>
 
-        {/* Subtitle */}
+        {/* Tagline */}
         <motion.p
-          className="font-sans text-[clamp(0.875rem,1.5vw,1.1rem)] text-warm-300 mb-10 tracking-wide"
+          className="font-sans text-[clamp(0.9rem,1.8vw,1.2rem)] text-warm-300 mb-10 tracking-[0.1em]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.7 }}
+          transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.8 }}
         >
-          {t(dict['hero.subtitle'].ko, dict['hero.subtitle'].en)}
+          {t('공간 창조에 대한 미학', 'The Aesthetics of Spatial Creation')}
         </motion.p>
 
         {/* CTAs */}

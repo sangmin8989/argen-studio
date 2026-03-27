@@ -55,6 +55,8 @@ const dict = {
   'services.commercialDesc': { ko: '카페, 클리닉, 오피스 등 브랜드 정체성이 드러나는 상업 공간. 고객 경험과 운영 효율을 동시에 고려한 전문 설계입니다.', en: 'Commercial spaces including cafes, clinics, and offices. Professional design for customer experience and operational efficiency.' },
   'services.church': { ko: '교회 인테리어', en: 'Church Interior' },
   'services.churchDesc': { ko: '예배 공간의 숭고함과 현대적 감각의 조화. 음향, 조명, 동선을 종합적으로 설계합니다.', en: 'Harmonizing sacredness with modern sensibility. Comprehensive design of acoustics, lighting, and flow.' },
+  'services.hospital': { ko: '병원 인테리어', en: 'Hospital & Clinic Interior' },
+  'services.hospitalDesc': { ko: '환자 경험과 의료 동선을 고려한 전문 설계. 신뢰감과 쾌적함을 동시에 갖춘 의료 공간을 완성합니다.', en: 'Professional design considering patient experience and medical workflow. Creating healthcare spaces that inspire trust and comfort.' },
 
   // Portfolio
   'portfolio.label': { ko: '포트폴리오', en: 'Portfolio' },

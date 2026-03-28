@@ -6,6 +6,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/PageTransition';
 import Preloader from '@/components/layout/Preloader';
+import SmoothScroll from '@/components/SmoothScroll';
 
 const playfair = Playfair_Display({
   variable: '--font-playfair',
@@ -52,6 +53,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-warm-100 text-dark">
         <I18nProvider>
           <Preloader />
+          <SmoothScroll />
           <Header />
           <main className="flex-1">
             <PageTransition>{children}</PageTransition>

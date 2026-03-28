@@ -12,7 +12,7 @@
   --color-warm-700:    #6B5A49;
   --color-warm-800:    #4A3F35;
   --color-warm-900:    #2D2620;
-  --color-accent:      #8C7560;
+  --color-accent:      #C9A96E;
   --color-dark:        #1A1A1A;
   --color-charcoal:    #1C1917;
 
@@ -42,7 +42,7 @@ body {
 /* ── SCROLLBAR ───────────────────────────────────────── */
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #efd6cf; }
-::-webkit-scrollbar-thumb { background: #8C7560; border-radius: 3px; }
+::-webkit-scrollbar-thumb { background: #C9A96E; border-radius: 3px; }
 
 /* ── TYPOGRAPHY ──────────────────────────────────────── */
 h1, h2, h3 {
@@ -92,7 +92,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   left: 0;
   width: 8px;
   height: 8px;
-  background: #8C7560;
+  background: #C9A96E;
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
@@ -122,7 +122,7 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #8C7560;
+  color: #C9A96E;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -149,3 +149,20 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 
 /* Korean text overflow fix */
 h1, h2, h3, p { word-break: keep-all; overflow-wrap: break-word; }
+
+/* ── NOISE / GRAIN TEXTURE OVERLAY ─────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::after { display: none; }
+}

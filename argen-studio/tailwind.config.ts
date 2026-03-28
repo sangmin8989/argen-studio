@@ -22,7 +22,7 @@ const config: Config = {
           800: '#4A3F35',
           900: '#2D2620',
         },
-        accent: '#8C7560',
+        accent: '#C9A96E',
         dark:   '#1A1A1A',
         terracotta: '#C0897B',
         charcoal: '#1C1917',

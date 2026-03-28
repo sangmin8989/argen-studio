@@ -73,16 +73,31 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 .reveal-delay-4 { transition-delay: 0.48s; }
 .reveal-delay-5 { transition-delay: 0.60s; }
 
-/* Image clip-path reveal — curtain opens from center */
+/* Image clip-path reveal — curtain wipe left-to-right */
 .reveal-image {
-  clip-path: inset(0 50% 0 50%);
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
   opacity: 0;
-  transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1),
-              opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: clip-path 1.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reveal-image.visible {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  opacity: 1;
+}
+
+/* Image scale reveal — zoom in slightly while appearing */
+.reveal-image-scale {
+  clip-path: inset(0 50% 0 50%);
+  opacity: 0;
+  transform: scale(1.05);
+  transition: clip-path 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 1.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-image-scale.visible {
   clip-path: inset(0 0 0 0);
   opacity: 1;
+  transform: scale(1);
 }
 
 /* ── CUSTOM CURSOR ──────────────────────────────────── */

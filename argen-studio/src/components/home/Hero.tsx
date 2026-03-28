@@ -27,7 +27,8 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden bg-dark"
+      className="relative w-full h-screen min-h-[600px] flex items-center justify-center overflow-hidden"
+      style={{ background: 'linear-gradient(135deg, #d5948d, #cc807a, #9c5c58)' }}
     >
       {/* Subtle background texture */}
       <div className="absolute inset-0 opacity-[0.03]" style={{

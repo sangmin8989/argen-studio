@@ -7,6 +7,7 @@ import Footer from '@/components/layout/Footer';
 import PageTransition from '@/components/PageTransition';
 import Preloader from '@/components/layout/Preloader';
 
+
 const playfair = Playfair_Display({
   variable: '--font-playfair',
   subsets: ['latin'],

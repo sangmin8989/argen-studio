@@ -34,32 +34,27 @@ export default function Preloader() {
         <div className="preloader-glow" />
       </div>
 
-      <div className="relative flex flex-col items-center gap-5">
-        {/* Logo — Netflix-style zoom from large → settle */}
+      <div className="relative flex flex-col items-center gap-6">
+        {/* Logo — 침묵의 워드마크 */}
         <div className="preloader-logo flex items-baseline gap-1">
-          <span className="font-serif text-[clamp(3rem,9vw,6rem)] font-bold text-accent">
+          <span className="font-serif text-[clamp(3.2rem,9.5vw,6.4rem)] font-normal text-warm-100">
             A
           </span>
-          <span className="font-sans text-[clamp(1rem,2.5vw,1.6rem)] font-medium tracking-[0.18em] uppercase text-warm-200">
-            RGEN STUDIO
+          <span className="font-sans text-[clamp(1rem,2.5vw,1.6rem)] font-medium tracking-[0.22em] uppercase text-warm-100">
+            RGEN&nbsp;STUDIO
           </span>
         </div>
 
-        {/* Accent line */}
-        <div className="preloader-line h-[1px] bg-accent" />
-
-        {/* Tagline */}
-        <p className="font-sans text-xs tracking-[0.3em] text-warm-500 uppercase preloader-tag">
-          DESIGN · BUILD · MANAGE
-        </p>
+        {/* Hairline */}
+        <div className="preloader-line h-px bg-warm-100/40" />
       </div>
 
       <style jsx>{`
-        /* Radial glow — warm spotlight behind logo */
+        /* Radial glow — 매우 미세 (촌스러운 lens flare 제거) */
         .preloader-glow {
-          width: 400px;
-          height: 400px;
-          background: radial-gradient(circle, rgba(140,117,96,0.15) 0%, transparent 70%);
+          width: 480px;
+          height: 480px;
+          background: radial-gradient(circle, rgba(250,248,245,0.06) 0%, transparent 70%);
           opacity: 0;
           animation: glowPulse 2s ease-out 0.3s forwards;
         }

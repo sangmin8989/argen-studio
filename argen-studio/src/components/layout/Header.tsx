@@ -6,12 +6,12 @@ import Link from 'next/link';
 import { useLang } from '@/lib/i18n';
 import dict from '@/lib/dict';
 
+// 명품 토대: process/quote 제거. 본질만.
 const navLinks = [
-  { href: '#about', ko: 'nav.about' as const },
-  { href: '#services', ko: 'nav.services' as const },
-  { href: '#portfolio', ko: 'nav.portfolio' as const },
-  { href: '#process', ko: 'nav.process' as const },
-  { href: '#contact', ko: 'nav.contact' as const },
+  { href: '#about', key: 'nav.about' as const },
+  { href: '#works', key: 'nav.portfolio' as const },
+  { href: '#services', key: 'nav.services' as const },
+  { href: '#contact', key: 'nav.contact' as const },
 ];
 
 export default function Header() {
@@ -43,11 +43,13 @@ export default function Header() {
   const scrollTo = (href: string) => {
     setMenuOpen(false);
     if (href === '#') return;
+    // works 섹션은 portfolio id로 라우팅 (id 변경 안 했으므로 호환)
+    const target = href === '#works' ? '#portfolio' : href;
     if (!isHome) {
-      window.location.href = '/' + href;
+      window.location.href = '/' + target;
       return;
     }
-    const el = document.querySelector(href);
+    const el = document.querySelector(target);
     if (!el) return;
     const navH = 76;
     const top = el.getBoundingClientRect().top + window.scrollY - navH;
@@ -57,136 +59,126 @@ export default function Header() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           scrolled
-            ? 'bg-warm-100/95 backdrop-blur-md shadow-sm border-b border-warm-200'
+            ? 'bg-warm-100/90 backdrop-blur-md border-b border-warm-200'
             : 'bg-transparent'
         }`}
         style={{ height: 76 }}
       >
         <div className="max-w-[1320px] mx-auto px-[clamp(1.25rem,5vw,4rem)] h-full flex items-center justify-between">
-          {/* Logo */}
+          {/* Logo — 침묵의 워드마크. 강조 컬러 없음. */}
           <Link href="/" className="flex items-baseline gap-0.5 group">
             <span
-              className="font-serif text-2xl font-bold leading-none"
-              style={{ color: scrolled ? '#8C7560' : '#FAF8F5' }}
+              className="font-serif text-[1.6rem] leading-none transition-colors duration-500"
+              style={{ color: scrolled ? '#1C1917' : '#FAF8F5' }}
             >
               A
             </span>
             <span
-              className="font-sans text-sm font-medium tracking-[0.18em] uppercase transition-colors"
-              style={{ color: scrolled ? '#1A1A1A' : '#FAF8F5' }}
+              className="font-sans text-xs font-medium tracking-[0.22em] uppercase transition-colors duration-500"
+              style={{ color: scrolled ? '#1C1917' : '#FAF8F5' }}
             >
-              RGEN STUDIO
+              RGEN&nbsp;STUDIO
             </span>
           </Link>
 
-          {/* Desktop nav */}
-          <ul className="hidden lg:flex items-center gap-8">
+          {/* Desktop nav — 미니멀. CTA 버튼 제거. */}
+          <ul className="hidden lg:flex items-center gap-10">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <button
                   onClick={() => scrollTo(link.href)}
-                  className={`font-sans text-sm font-medium tracking-wide transition-colors hover:text-accent ${
-                    scrolled ? 'text-dark/70 hover:text-accent' : 'text-warm-100/80 hover:text-warm-100'
+                  className={`font-sans text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300 ${
+                    scrolled ? 'text-dark/70 hover:text-dark' : 'text-warm-100/70 hover:text-warm-100'
                   }`}
                 >
-                  {t(dict[link.ko].ko, dict[link.ko].en)}
+                  {t(dict[link.key].ko, dict[link.key].en)}
                 </button>
               </li>
             ))}
           </ul>
 
-          {/* Right: Lang toggle + CTA */}
-          <div className="hidden lg:flex items-center gap-4">
+          {/* Right: Lang toggle만. 무료견적 버튼 제거. */}
+          <div className="hidden lg:flex items-center">
             <button
               onClick={toggle}
-              className={`font-sans text-xs font-medium tracking-wider transition-colors ${
+              className={`font-sans text-[10px] font-medium tracking-[0.2em] uppercase transition-colors duration-300 ${
                 scrolled ? 'text-dark/60 hover:text-dark' : 'text-warm-100/60 hover:text-warm-100'
               }`}
+              aria-label="언어 전환"
             >
-              <span className={lang === 'ko' ? 'font-bold text-accent' : ''}>KO</span>
-              <span className="mx-1 opacity-40">/</span>
-              <span className={lang === 'en' ? 'font-bold text-accent' : ''}>EN</span>
-            </button>
-            <button
-              onClick={() => scrollTo('#contact')}
-              className="px-5 py-2.5 rounded font-sans text-sm font-medium tracking-wide transition-all duration-200 bg-accent text-warm-50 hover:bg-warm-700"
-            >
-              {t(dict['nav.quote'].ko, dict['nav.quote'].en)}
+              <span className={lang === 'ko' ? 'font-semibold' : ''}>KO</span>
+              <span className="mx-1.5 opacity-30">·</span>
+              <span className={lang === 'en' ? 'font-semibold' : ''}>EN</span>
             </button>
           </div>
 
-          {/* Mobile: lang toggle + hamburger */}
-          <div className="lg:hidden flex items-center gap-3">
+          {/* Mobile: lang + hamburger */}
+          <div className="lg:hidden flex items-center gap-4">
             <button
               onClick={toggle}
-              className={`font-sans text-xs font-medium tracking-wider transition-colors ${
+              className={`font-sans text-[10px] font-medium tracking-[0.2em] uppercase transition-colors ${
                 scrolled ? 'text-dark/60 hover:text-dark' : 'text-warm-100/60 hover:text-warm-100'
               }`}
+              aria-label="언어 전환"
             >
-              <span className={lang === 'ko' ? 'font-bold text-accent' : ''}>KO</span>
-              <span className="mx-0.5 opacity-40">/</span>
-              <span className={lang === 'en' ? 'font-bold text-accent' : ''}>EN</span>
+              <span className={lang === 'ko' ? 'font-semibold' : ''}>KO</span>
+              <span className="mx-1 opacity-30">·</span>
+              <span className={lang === 'en' ? 'font-semibold' : ''}>EN</span>
             </button>
             <button
               onClick={() => setMenuOpen((v) => !v)}
               aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
               className="flex flex-col justify-center gap-[5px] w-8 h-8 p-1"
             >
-            <span
-              className={`block h-[1.5px] rounded-full transition-all duration-300 origin-center ${
-                scrolled ? 'bg-dark' : 'bg-warm-100'
-              } ${menuOpen ? 'rotate-45 translate-y-[6.5px]' : ''}`}
-            />
-            <span
-              className={`block h-[1.5px] rounded-full transition-all duration-300 ${
-                scrolled ? 'bg-dark' : 'bg-warm-100'
-              } ${menuOpen ? 'opacity-0' : ''}`}
-            />
-            <span
-              className={`block h-[1.5px] rounded-full transition-all duration-300 origin-center ${
-                scrolled ? 'bg-dark' : 'bg-warm-100'
-              } ${menuOpen ? '-rotate-45 -translate-y-[6.5px]' : ''}`}
-            />
+              <span
+                className={`block h-[1px] rounded-none transition-all duration-300 origin-center ${
+                  scrolled ? 'bg-dark' : 'bg-warm-100'
+                } ${menuOpen ? 'rotate-45 translate-y-[6px]' : ''}`}
+              />
+              <span
+                className={`block h-[1px] rounded-none transition-all duration-300 ${
+                  scrolled ? 'bg-dark' : 'bg-warm-100'
+                } ${menuOpen ? 'opacity-0' : ''}`}
+              />
+              <span
+                className={`block h-[1px] rounded-none transition-all duration-300 origin-center ${
+                  scrolled ? 'bg-dark' : 'bg-warm-100'
+                } ${menuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`}
+              />
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile menu */}
+      {/* Mobile menu — 풀스크린 침묵 */}
       <div
-        className={`fixed inset-0 z-40 bg-warm-100 flex flex-col justify-between transition-transform duration-300 ease-out-expo ${
+        className={`fixed inset-0 z-40 bg-warm-100 flex flex-col justify-between transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         style={{ paddingTop: 76 }}
       >
-        <ul className="flex flex-col px-8 pt-6 gap-1">
+        <ul className="flex flex-col px-8 pt-10 gap-2">
           {navLinks.map((link) => (
             <li key={link.href}>
               <button
                 onClick={() => scrollTo(link.href)}
-                className="w-full text-center font-serif text-2xl font-medium py-3 border-b border-warm-200 text-dark hover:text-accent transition-colors"
+                className="w-full text-left font-serif text-[2.4rem] leading-tight py-2 text-dark hover:text-warm-700 transition-colors"
               >
-                {t(dict[link.ko].ko, dict[link.ko].en)}
+                {t(dict[link.key].ko, dict[link.key].en)}
               </button>
             </li>
           ))}
         </ul>
-        <div className="px-8 pb-10 flex flex-col items-center gap-4">
+        <div className="px-8 pb-12">
           <button
             onClick={toggle}
-            className="font-sans text-sm font-medium text-warm-600"
+            className="font-sans text-xs font-medium tracking-[0.2em] uppercase text-warm-600"
           >
-            <span className={lang === 'ko' ? 'font-bold text-accent' : ''}>한국어</span>
-            <span className="mx-2 opacity-40">/</span>
-            <span className={lang === 'en' ? 'font-bold text-accent' : ''}>English</span>
-          </button>
-          <button
-            onClick={() => scrollTo('#contact')}
-            className="w-full py-4 bg-accent text-warm-50 font-sans text-base font-medium tracking-wide rounded"
-          >
-            {t(dict['nav.quoteFull'].ko, dict['nav.quoteFull'].en)}
+            <span className={lang === 'ko' ? 'font-semibold text-dark' : ''}>한국어</span>
+            <span className="mx-2 opacity-30">·</span>
+            <span className={lang === 'en' ? 'font-semibold text-dark' : ''}>English</span>
           </button>
         </div>
       </div>

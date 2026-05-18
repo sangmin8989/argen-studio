@@ -9,6 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // 명품 토대 팔레트 — globals.css와 동기화. 골드 폐기.
         cream: '#FAF8F5',
         warm: {
           50:  '#FEFDFB',
@@ -22,17 +23,22 @@ const config: Config = {
           800: '#4A3F35',
           900: '#2D2620',
         },
-        accent: '#C9A96E',
-        dark:   '#1A1A1A',
-        terracotta: '#C0897B',
+        // accent: 골드(#C9A96E) 폐기 → 깊은 스톤. 컬러로 강조 X.
+        accent: '#6B5A49',
+        // 잉크
+        dark:     '#1C1917',
         charcoal: '#1C1917',
+        terracotta: '#C0897B',
       },
       fontFamily: {
-        serif: ['var(--font-playfair)', 'Georgia', 'serif'],
-        sans:  ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
+        serif: ['var(--font-eb-garamond)', 'Pretendard Variable', 'Georgia', 'serif'],
+        sans:  ['Pretendard Variable', '-apple-system', 'BlinkMacSystemFont', 'system-ui', '"Apple SD Gothic Neo"', '"Noto Sans KR"', 'sans-serif'],
       },
       transitionTimingFunction: {
         'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+      },
+      letterSpacing: {
+        tightest: '-0.02em',
       },
     },
   },

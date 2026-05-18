@@ -1,29 +1,39 @@
 @import "tailwindcss";
+/* Pretendard Variable은 layout.tsx의 <head>에서 link tag로 로드 */
 
 @theme inline {
-  --color-cream:       #f6e6e1;
-  --color-warm-50:     #faf0ec;
-  --color-warm-100:    #f6e6e1;
-  --color-warm-200:    #efd6cf;
-  --color-warm-300:    #dfb8ad;
+  /* ─── 명품 토대 컬러 팔레트 ─────────────────────────
+     침묵의 무광. 골드 ✗ · 핑크 ✗ · 채도 낮은 모래·차콜.
+     accent는 *컬러*가 아닌 *깊은 스톤*. 강조는 위치/크기/여백으로.
+  ──────────────────────────────────────────────── */
+
+  /* 배경 — 종이·모래·차콜 */
+  --color-cream:       #FAF8F5;
+  --color-warm-50:     #FEFDFB;
+  --color-warm-100:    #FAF8F5;   /* 오프화이트 (본문 배경) */
+  --color-warm-200:    #F0EBE3;   /* 모래 (섹션 콘트라스트) */
+  --color-warm-300:    #E0D5C7;   /* 라인·테두리·미스트 */
   --color-warm-400:    #C4B5A0;
   --color-warm-500:    #A89279;
   --color-warm-600:    #8C7560;
-  --color-warm-700:    #6B5A49;
+  --color-warm-700:    #6B5A49;   /* 본문 콘트라스트·강조 */
   --color-warm-800:    #4A3F35;
   --color-warm-900:    #2D2620;
-  --color-accent:      #C9A96E;
-  --color-dark:        #1A1A1A;
+
+  /* 액센트 — 골드(#C9A96E) 폐기. 깊은 스톤으로 침묵 */
+  --color-accent:      #6B5A49;
+
+  /* 잉크 */
+  --color-dark:        #1C1917;   /* 차콜 (검정 X) */
   --color-charcoal:    #1C1917;
 
-  --font-serif: var(--font-playfair);
-  --font-sans:  var(--font-dm-sans);
+  /* 폰트 변수 — Pretendard 우선, EB Garamond 보조 */
+  --font-serif: var(--font-eb-garamond);
+  --font-sans:  'Pretendard Variable', var(--font-pretendard-fallback);
 }
 
 /* ── RESET ──────────────────────────────────────────── */
-*, *::before, *::after {
-  box-sizing: border-box;
-}
+*, *::before, *::after { box-sizing: border-box; }
 
 html {
   scroll-behavior: smooth;
@@ -32,23 +42,29 @@ html {
 }
 
 body {
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  background-color: #f6e6e1;
-  color: #1A1A1A;
+  font-family: 'Pretendard Variable', -apple-system, BlinkMacSystemFont,
+               system-ui, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  background-color: #FAF8F5;
+  color: #1C1917;
   line-height: 1.6;
   overflow-x: hidden;
+  font-feature-settings: 'ss01', 'ss02', 'tnum';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* ── SCROLLBAR ───────────────────────────────────────── */
-::-webkit-scrollbar { width: 5px; }
-::-webkit-scrollbar-track { background: #efd6cf; }
-::-webkit-scrollbar-thumb { background: #C9A96E; border-radius: 3px; }
+/* ── SCROLLBAR — 침묵 (골드 제거) ────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(28, 25, 23, 0.18); border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: rgba(28, 25, 23, 0.35); }
 
 /* ── TYPOGRAPHY ──────────────────────────────────────── */
 h1, h2, h3 {
-  font-family: var(--font-playfair), Georgia, serif;
+  font-family: var(--font-eb-garamond), 'Pretendard Variable', Georgia, serif;
   line-height: 1.1;
-  font-weight: 700;
+  font-weight: 400;
+  letter-spacing: -0.01em;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -100,14 +116,14 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   transform: scale(1);
 }
 
-/* ── CUSTOM CURSOR ──────────────────────────────────── */
+/* ── CUSTOM CURSOR — 침묵의 점 (골드 제거) ─────────── */
 .cursor-dot {
   position: fixed;
   top: 0;
   left: 0;
-  width: 8px;
-  height: 8px;
-  background: #C9A96E;
+  width: 6px;
+  height: 6px;
+  background: #1C1917;
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
@@ -118,32 +134,28 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
   mix-blend-mode: difference;
   opacity: 0;
 }
-.cursor-dot.visible {
-  opacity: 1;
-}
+.cursor-dot.visible { opacity: 1; }
 .cursor-dot.hovering {
-  width: 80px;
-  height: 80px;
-  background: rgba(140, 117, 96, 0.15);
-  backdrop-filter: blur(4px);
+  width: 60px;
+  height: 60px;
+  background: rgba(28, 25, 23, 0.08);
+  backdrop-filter: blur(2px);
   mix-blend-mode: normal;
 }
 .cursor-label {
   position: fixed;
   pointer-events: none;
   z-index: 10000;
-  font-family: var(--font-dm-sans), system-ui, sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-family: 'Pretendard Variable', system-ui, sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: #C9A96E;
+  color: #1C1917;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-.cursor-label.visible {
-  opacity: 1;
-}
+.cursor-label.visible { opacity: 1; }
 
 /* ── PAGE TRANSITION ────────────────────────────────── */
 .page-transition-enter {
@@ -165,14 +177,14 @@ button { cursor: pointer; font-family: inherit; border: none; background: none; 
 /* Korean text overflow fix */
 h1, h2, h3, p { word-break: keep-all; overflow-wrap: break-word; }
 
-/* ── NOISE / GRAIN TEXTURE OVERLAY ─────────────────── */
+/* ── NOISE / GRAIN TEXTURE OVERLAY — 매우 미세 ─────── */
 body::after {
   content: '';
   position: fixed;
   inset: 0;
   z-index: 9998;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   mix-blend-mode: multiply;
@@ -180,4 +192,8 @@ body::after {
 
 @media (prefers-reduced-motion: reduce) {
   body::after { display: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

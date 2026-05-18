@@ -8,12 +8,13 @@ import { useLang } from '@/lib/i18n';
 import dict from '@/lib/dict';
 import { portfolios, getPortfolioImagePath, type PortfolioCategory } from '@/data/portfolios';
 
-const filters = ['all', 'commercial', 'exterior', 'church'] as const;
+const filters = ['all', 'commercial', 'residential', 'exterior', 'church'] as const;
 type Filter = (typeof filters)[number];
 
 const filterKeys: Record<Filter, { ko: string; en: string }> = {
   all: dict['portfolio.all'],
   commercial: dict['portfolio.commercial'],
+  residential: dict['portfolio.residential'],
   exterior: { ko: '건물 외장', en: 'Exterior' },
   church: dict['portfolio.church'],
 };

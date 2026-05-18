@@ -5,9 +5,8 @@ import dict from '@/lib/dict';
 
 const menuLinks = [
   { href: '#about', key: 'nav.about' as const },
-  { href: '#services', key: 'nav.services' as const },
   { href: '#portfolio', key: 'nav.portfolio' as const },
-  { href: '#process', key: 'nav.process' as const },
+  { href: '#services', key: 'nav.services' as const },
   { href: '#contact', key: 'nav.contact' as const },
 ];
 
@@ -16,14 +15,14 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-dark text-warm-300">
+    <footer id="contact" className="bg-dark text-warm-300">
       <div className="max-w-[1320px] mx-auto px-[clamp(1.25rem,5vw,4rem)] py-16">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pb-12 border-b border-warm-800">
           {/* Brand */}
           <div>
             <div className="flex items-baseline gap-0.5 mb-4">
-              <span className="font-serif text-2xl font-bold text-accent">A</span>
-              <span className="font-sans text-sm font-medium tracking-[0.18em] uppercase text-warm-200">RGEN STUDIO</span>
+              <span className="font-serif text-2xl text-warm-200">A</span>
+              <span className="font-sans text-sm font-medium tracking-[0.18em] uppercase text-warm-200">RGEN&nbsp;STUDIO</span>
             </div>
             <p className="font-sans text-sm leading-relaxed text-warm-400 max-w-xs">
               {t(dict['footer.desc1'].ko, dict['footer.desc1'].en)}<br />

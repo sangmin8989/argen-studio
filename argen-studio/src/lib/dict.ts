@@ -1,126 +1,78 @@
-// 정적 UI 텍스트 번역 사전
-// portfolios.ts의 title/location 등은 이미 ko/en 필드가 있으므로 여기에 포함하지 않음
+// 정적 UI 텍스트 사전 — 명품 토대 톤.
+// 업체 단어("무료 견적", "20년 업력", "A/S", "투명한 견적", "PREMIUM") 폐기.
+// 시인의 톤 · 절제 · 침묵.
+// portfolios.ts의 title/location 등은 별도.
 
 const dict = {
-  // Nav
-  'nav.about': { ko: '회사소개', en: 'About' },
-  'nav.services': { ko: '서비스', en: 'Services' },
-  'nav.portfolio': { ko: '포트폴리오', en: 'Portfolio' },
-  'nav.process': { ko: '프로세스', en: 'Process' },
-  'nav.contact': { ko: '문의', en: 'Contact' },
-  'nav.quote': { ko: '무료 견적', en: 'Free Quote' },
-  'nav.quoteFull': { ko: '무료 견적 받기', en: 'Get Free Quote' },
+  // Nav — 짧게. 명령형 X.
+  'nav.about': { ko: 'Studio', en: 'Studio' },
+  'nav.services': { ko: 'Practice', en: 'Practice' },
+  'nav.portfolio': { ko: 'Works', en: 'Works' },
+  'nav.contact': { ko: 'Inquiry', en: 'Inquiry' },
 
-  // Hero
-  'hero.eyebrow': { ko: 'DESIGN · BUILD · MANAGE', en: 'DESIGN · BUILD · MANAGE' },
-  'hero.headline1': { ko: '공간이 바뀌면', en: 'Transform' },
-  'hero.headline2': { ko: '일상이 바뀝니다', en: 'Your Space' },
-  'hero.subtitle': { ko: '투명한 견적 · 책임 시공 · 전문 디자인', en: 'Transparent Quotes · Quality Construction · Expert Design' },
-  'hero.cta1': { ko: '무료 견적 받기', en: 'Get Free Quote' },
-  'hero.cta2': { ko: '포트폴리오 보기', en: 'View Portfolio' },
-  'hero.scroll': { ko: '스크롤', en: 'Scroll' },
+  // Hero — 한 줄의 시
+  'hero.eyebrow': { ko: 'ARGEN STUDIO', en: 'ARGEN STUDIO' },
+  'hero.headline1': { ko: '공간은 가구가 아니라', en: 'Space is not furniture' },
+  'hero.headline2': { ko: '시간이다', en: 'but time' },
+  'hero.subtitle': { ko: '재료와 빛, 그리고 머무는 사람.', en: 'Material, light, and those who stay.' },
+  'hero.cta2': { ko: '작품 보기', en: 'View Works' },
 
-  // About
-  'about.label': { ko: '회사 소개', en: 'About Us' },
-  'about.headline1': { ko: '현장에서 검증된', en: 'Field-Tested' },
-  'about.headline2': { ko: '기준과 구조', en: 'Standards' },
+  // About — Studio
+  'about.label': { ko: 'Studio', en: 'Studio' },
+  'about.headline1': { ko: '재료와 빛,', en: 'Material, light,' },
+  'about.headline2': { ko: '그리고 머무는 사람.', en: 'and those who stay.' },
   'about.desc': {
-    ko: '실제로 불편하지 않은 공간, 시간이 지나도 문제없는 마감, 추가 비용이 발생하지 않는 설계. 아르젠은 인테리어 판단을 대신해주는 파트너입니다.',
-    en: 'Spaces without inconvenience, finishes without future issues, budgets without overruns. ARGEN is your interior decision-making partner.',
+    ko: '아르젠은 공간을 짓지 않습니다. 머무는 시간을 짓습니다. 매번 다른 사람을 위해, 매번 처음인 듯한 자세로.',
+    en: 'We do not build spaces. We build the time spent within them. For each new person, as if for the first time.',
   },
-  'about.s1.title': { ko: '시공 가능한 설계', en: 'Buildable Design' },
-  'about.s1.desc': { ko: '모든 디자인은 실제 시공 가능 여부와 유지보수까지 고려합니다.', en: 'Every design considers construction feasibility and maintenance.' },
-  'about.s2.title': { ko: '투명한 견적', en: 'Transparent Pricing' },
-  'about.s2.desc': { ko: '자재비·인건비·공정비를 명확히 분리하여 안내합니다.', en: 'Materials, labor, and process costs are clearly separated.' },
-  'about.s3.title': { ko: '자재 정보 공개', en: 'Material Disclosure' },
-  'about.s3.desc': { ko: '모든 자재의 브랜드·규격·선정 근거를 공개합니다.', en: 'Brand, specifications, and selection rationale for all materials disclosed.' },
-  'about.s4.title': { ko: '일관된 책임', en: 'Consistent Accountability' },
-  'about.s4.desc': { ko: '착공부터 준공, 그 이후까지 동일한 기준으로 책임집니다.', en: 'Same standards of responsibility from start to finish and beyond.' },
+  'about.s1.title': { ko: '재료의 안목', en: 'A Sense for Material' },
+  'about.s1.desc': { ko: '우드, 석재, 금속, 패브릭. 우리는 재료를 고르지 않고 만납니다.', en: 'Wood, stone, metal, fabric — we do not choose materials, we meet them.' },
+  'about.s2.title': { ko: '빛과 그림자', en: 'Light and Shadow' },
+  'about.s2.desc': { ko: '낮의 빛과 밤의 그림자를 같이 설계합니다. 둘 다 공간의 일부입니다.', en: 'We design daylight and shadow together. Both are part of the space.' },
+  'about.s3.title': { ko: '시간이 흐른 마감', en: 'A Finish That Ages Well' },
+  'about.s3.desc': { ko: '오늘 가장 새것이 아니라, 10년 뒤에도 그 자리에 있을 마감을 고릅니다.', en: 'Not the newest today, but a finish that will still belong ten years on.' },
+  'about.s4.title': { ko: '다음 사람을 위해', en: 'For the Next Person' },
+  'about.s4.desc': { ko: '디테일은 다음 사용자를 위한 배려입니다. 보이지 않는 곳까지.', en: 'Every detail is a kindness to the next user — including where no one looks.' },
 
-  // Trust
-  'trust.completed': { ko: '시공 완료', en: 'Completed' },
-  'trust.retention': { ko: '재계약율', en: 'Retention' },
-  'trust.experience': { ko: '업력', en: 'Experience' },
-  'trust.experienceSuffix': { ko: '년', en: 'yrs' },
-  'trust.satisfaction': { ko: '고객 만족도', en: 'Satisfaction' },
+  // Services — Practice (카테고리)
+  'services.label': { ko: 'Practice', en: 'Practice' },
+  'services.title': { ko: '공간', en: 'Spaces' },
+  'services.subtitle': { ko: '머무는 시간에 맞춰.', en: 'Designed for the time spent within.' },
+  'services.viewProjects': { ko: 'Works', en: 'Works' },
+  'services.exterior': { ko: '건물 외장', en: 'Exterior' },
+  'services.exteriorDesc': { ko: '거리에 면하는 첫 표정. 건물이 도시와 만나는 자리.', en: 'The first expression facing the street — where the building meets the city.' },
+  'services.commercial': { ko: '상업 공간', en: 'Commercial' },
+  'services.commercialDesc': { ko: '브랜드가 손님을 처음 마주하는 자리. 머무는 시간이 곧 인상이 되는 곳.', en: 'Where a brand meets its guest — where the time spent becomes the impression.' },
+  'services.church': { ko: '교회', en: 'Sacred' },
+  'services.churchDesc': { ko: '말하지 않아도 머무는 공간. 소리와 빛, 침묵이 함께 설계됩니다.', en: 'A space that holds without speaking — sound, light, and silence designed together.' },
+  'services.hospital': { ko: '의료 공간', en: 'Clinic' },
+  'services.hospitalDesc': { ko: '몸을 맡기는 자리. 신뢰는 분위기에서 시작합니다.', en: 'Where the body is entrusted. Trust begins with atmosphere.' },
 
-  // Services
-  'services.label': { ko: '서비스', en: 'Services' },
-  'services.title': { ko: '전문 분야', en: 'Our Expertise' },
-  'services.subtitle': { ko: '공간의 특성과 용도에 맞는 맞춤형 리모델링', en: 'Custom remodeling tailored to your space' },
-  'services.viewProjects': { ko: '프로젝트 보기', en: 'View Projects' },
-  'services.exterior': { ko: '건물 외장 리모델링', en: 'Exterior Remodeling' },
-  'services.exteriorDesc': { ko: '건물 외관의 가치를 높이는 파사드·간판·외장재 리모델링. 브랜드 이미지와 건물의 첫인상을 바꿉니다.', en: 'Facade, signage, and exterior remodeling that elevates building value and brand image.' },
-  'services.commercial': { ko: '상업 공간', en: 'Commercial Space' },
-  'services.commercialDesc': { ko: '카페, 클리닉, 오피스 등 브랜드 정체성이 드러나는 상업 공간. 고객 경험과 운영 효율을 동시에 고려한 전문 설계입니다.', en: 'Commercial spaces including cafes, clinics, and offices. Professional design for customer experience and operational efficiency.' },
-  'services.church': { ko: '교회 인테리어', en: 'Church Interior' },
-  'services.churchDesc': { ko: '예배 공간의 숭고함과 현대적 감각의 조화. 음향, 조명, 동선을 종합적으로 설계합니다.', en: 'Harmonizing sacredness with modern sensibility. Comprehensive design of acoustics, lighting, and flow.' },
-  'services.hospital': { ko: '병원 인테리어', en: 'Hospital & Clinic Interior' },
-  'services.hospitalDesc': { ko: '환자 경험과 의료 동선을 고려한 전문 설계. 신뢰감과 쾌적함을 동시에 갖춘 의료 공간을 완성합니다.', en: 'Professional design considering patient experience and medical workflow. Creating healthcare spaces that inspire trust and comfort.' },
-
-  // Portfolio
-  'portfolio.label': { ko: '포트폴리오', en: 'Portfolio' },
-  'portfolio.title': { ko: '시공 사례', en: 'Our Work' },
-  'portfolio.subtitle': { ko: '아르젠 스튜디오가 완성한 공간들', en: 'Spaces completed by ARGEN STUDIO' },
+  // Portfolio — Works
+  'portfolio.label': { ko: 'Works', en: 'Works' },
+  'portfolio.title': { ko: '선집', en: 'Selected' },
+  'portfolio.subtitle': { ko: '아르젠이 머문 시간들.', en: 'Hours we have spent.' },
   'portfolio.all': { ko: '전체', en: 'All' },
-  'portfolio.apartment': { ko: '아파트', en: 'Apartment' },
-  'portfolio.commercial': { ko: '상업공간', en: 'Commercial' },
-  'portfolio.church': { ko: '교회', en: 'Church' },
+  'portfolio.apartment': { ko: '주거', en: 'Residential' },
+  'portfolio.commercial': { ko: '상업', en: 'Commercial' },
+  'portfolio.church': { ko: '교회', en: 'Sacred' },
   'portfolio.residential': { ko: '주거', en: 'Residential' },
-  'portfolio.empty': { ko: '준비 중입니다.', en: 'Coming soon.' },
-  'portfolio.back': { ko: '← 포트폴리오', en: '← Portfolio' },
+  'portfolio.empty': { ko: '곧 더해집니다.', en: 'More to come.' },
+  'portfolio.back': { ko: '← Works', en: '← Works' },
   'portfolio.location': { ko: '위치', en: 'Location' },
   'portfolio.area': { ko: '면적', en: 'Area' },
-  'portfolio.completed': { ko: '준공', en: 'Completed' },
+  'portfolio.completed': { ko: '완공', en: 'Completed' },
   'portfolio.photos': { ko: '장', en: 'photos' },
   'portfolio.prev': { ko: '← 이전', en: '← Prev' },
   'portfolio.next': { ko: '다음 →', en: 'Next →' },
 
-  // Process
-  'process.label': { ko: '프로세스', en: 'Process' },
-  'process.title': { ko: '투명한 6단계 시공', en: '6-Step Process' },
-  'process.subtitle': { ko: '체계적인 프로세스로 안심하고 맡기실 수 있습니다', en: 'Trust our systematic process for peace of mind' },
-  'process.s1': { ko: '상담 및 견적', en: 'Consultation' },
-  'process.s1d': { ko: '고객의 요구사항과 예산을 파악하고 현장 상황을 고려한 1차 견적을 제공합니다.', en: 'Understanding client needs and budget, providing initial quote based on site conditions.' },
-  'process.s2': { ko: '현장 방문', en: 'Site Visit' },
-  'process.s2d': { ko: '전문가가 직접 방문하여 실측하고 구조적 가능성을 검토합니다.', en: 'Expert on-site visit for measurement and structural feasibility assessment.' },
-  'process.s3': { ko: '설계·제안', en: 'Design Proposal' },
-  'process.s3d': { ko: '3D 도면과 자재 샘플을 통해 완성될 공간을 미리 확인할 수 있습니다.', en: 'Preview your space through 3D drawings and material samples.' },
-  'process.s4': { ko: '계약·확정', en: 'Contract' },
-  'process.s4d': { ko: '상세 견적서와 일정표를 확정하고 계약을 진행합니다.', en: 'Finalize detailed quote and schedule, proceed with contract.' },
-  'process.s5': { ko: '시공', en: 'Construction' },
-  'process.s5d': { ko: '자체 시공팀이 책임지고 진행하며, 실시간으로 진행 상황을 공유합니다.', en: 'In-house team manages construction with real-time progress updates.' },
-  'process.s6': { ko: 'A/S·관리', en: 'After Service' },
-  'process.s6d': { ko: '시공 완료 후 1년간 무상 A/S를 제공합니다.', en: '1-year free after-service support.' },
-
-  // Pricing
-  'pricing.label': { ko: '견적 구조', en: 'Pricing' },
-  'pricing.title1': { ko: '투명한', en: 'Transparent' },
-  'pricing.title2': { ko: '견적 구성', en: 'Pricing' },
-  'pricing.subtitle': { ko: '숨김 없는 명확한 비용 안내', en: 'Clear cost breakdown with no hidden fees' },
-  'pricing.materials': { ko: '자재비', en: 'Materials' },
-  'pricing.materialsDesc': { ko: '마루, 벽지, 조명, 주방 가구 등 A/S가 가능한 정품 자재만 사용합니다.', en: 'Only genuine materials with warranty — flooring, wallpaper, lighting, cabinets.' },
-  'pricing.labor': { ko: '인건비', en: 'Labor' },
-  'pricing.laborDesc': { ko: '숙련된 자체 시공팀의 인건비. 외주가 아닌 직영 시공으로 품질을 보장합니다.', en: 'Skilled in-house team. Quality guaranteed through direct management.' },
-  'pricing.design': { ko: '설계·관리비', en: 'Design & Mgmt' },
-  'pricing.designDesc': { ko: '3D 설계, 현장 감리, 공정 관리 등 전문 인력의 기술료입니다.', en: '3D design, site supervision, project management fees.' },
-  'pricing.misc': { ko: '기타', en: 'Misc.' },
-  'pricing.miscDesc': { ko: '폐기물 처리, 양중비, 보험료 등 필수 부대 비용입니다.', en: 'Waste disposal, hoisting, insurance, and other essential costs.' },
-
-  // CTA
-  'cta.label': { ko: '무료 상담', en: 'Free Consultation' },
-  'cta.headline1': { ko: '지금 무료 견적을', en: 'Get Your Free' },
-  'cta.headline2': { ko: '받아보세요', en: 'Quote Today' },
-  'cta.subtitle': { ko: '전화로 간편하게 상담하실 수 있습니다.', en: 'Easy consultation via phone call.' },
-  'cta.phone': { ko: '전화 상담 (031-8043-7966)', en: 'Call (031-8043-7966)' },
-
-  // Footer
-  'footer.desc1': { ko: '실제 시공 기준으로 견적과 공정을 정리하는', en: 'Your remodeling partner with' },
-  'footer.desc2': { ko: '리모델링 파트너, (주)아르젠', en: 'field-tested standards — ARGEN Inc.' },
-  'footer.menu': { ko: '메뉴', en: 'Menu' },
-  'footer.contactLabel': { ko: '연락처', en: 'Contact' },
-  'footer.hq': { ko: '본사', en: 'HQ' },
-  'footer.showroom': { ko: '수원 전시장', en: 'Suwon Showroom' },
+  // Footer — 침묵
+  'footer.desc1': { ko: '재료와 빛, 그리고', en: 'Material, light, and' },
+  'footer.desc2': { ko: '머무는 사람을 위해.', en: 'those who stay.' },
+  'footer.menu': { ko: 'Index', en: 'Index' },
+  'footer.contactLabel': { ko: 'Contact', en: 'Contact' },
+  'footer.hq': { ko: 'Studio', en: 'Studio' },
+  'footer.showroom': { ko: 'Showroom', en: 'Showroom' },
 } as const;
 
 export type DictKey = keyof typeof dict;

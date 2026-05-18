@@ -46,13 +46,16 @@ export default function Portfolio() {
     <section id="portfolio" className="py-[clamp(5rem,10vw,9rem)] bg-warm-100">
       <div className="max-w-[1320px] mx-auto px-[clamp(1.25rem,5vw,4rem)]">
         <div className="text-center mb-12 reveal">
-          <span className="inline-block font-sans text-xs font-medium tracking-[0.2em] uppercase text-accent mb-4">
+          <span className="inline-block font-sans text-xs font-medium tracking-[0.2em] uppercase text-warm-500 mb-6">
             {t(dict['portfolio.label'].ko, dict['portfolio.label'].en)}
           </span>
-          <h2 className="font-serif text-[clamp(1.75rem,3.5vw,3rem)] font-bold text-dark mb-4">
-            {t(dict['portfolio.title'].ko, dict['portfolio.title'].en)}
+          <h2 className="font-serif text-[clamp(2.2rem,4vw,3.5rem)] font-normal text-dark leading-none mb-3">
+            {t('선집', 'Selected Works')}
           </h2>
-          <p className="font-sans text-sm text-warm-600 max-w-md mx-auto">
+          <p className="font-sans text-[11px] font-medium tracking-[0.28em] uppercase text-warm-500 mb-3">
+            {t('選集 · Selected Works', 'Selected · 選集')}
+          </p>
+          <p className="font-sans text-sm text-warm-500 max-w-sm mx-auto">
             {t(dict['portfolio.subtitle'].ko, dict['portfolio.subtitle'].en)}
           </p>
         </div>

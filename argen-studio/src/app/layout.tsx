@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Playfair_Display, DM_Sans } from 'next/font/google';
+import { EB_Garamond } from 'next/font/google';
 import './globals.css';
 import { I18nProvider } from '@/lib/i18n';
 import Header from '@/components/layout/Header';
@@ -8,29 +8,23 @@ import PageTransition from '@/components/PageTransition';
 import Preloader from '@/components/layout/Preloader';
 import SmoothScroll from '@/components/SmoothScroll';
 
-const playfair = Playfair_Display({
-  variable: '--font-playfair',
+// 영문 디스플레이용 — 절제된 세리프. 한글 본문은 Pretendard (globals.css)
+const ebGaramond = EB_Garamond({
+  variable: '--font-eb-garamond',
   subsets: ['latin'],
-  weight: ['400', '500', '700', '900'],
+  weight: ['400', '500', '600'],
   style: ['normal', 'italic'],
-  display: 'swap',
-});
-
-const dmSans = DM_Sans({
-  variable: '--font-dm-sans',
-  subsets: ['latin'],
-  weight: ['300', '400', '500', '700'],
   display: 'swap',
 });
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://argen.co.kr'),
-  title: '아르젠 스튜디오 | 상업공간·건물외장·교회 인테리어 전문 시공',
-  description: '아르젠 스튜디오 — 화성·수원 기반 인테리어 전문 업체. 스크린골프장, 음식점, 사무실, 교회, 건물 외장 리모델링. 설계부터 시공·A/S까지 직영 운영.',
-  keywords: ['아르젠 스튜디오', '아르젠', '화성 인테리어', '동탄 인테리어', '수원 인테리어', '상업공간 인테리어', '교회 인테리어', '건물 외장 리모델링', '스크린골프장 인테리어', '사무실 인테리어'],
+  title: '아르젠 스튜디오',
+  description: '재료와 빛, 그리고 머무는 사람 — 아르젠 스튜디오의 공간 작업.',
+  keywords: ['아르젠 스튜디오', '아르젠', '인테리어 스튜디오', '공간 디자인', '상업공간', '주거', '교회', '건물 외장'],
   openGraph: {
-    title: '아르젠 스튜디오 | 상업공간·건물외장·교회 전문 시공',
-    description: '공간이 바뀌면 일상이 바뀝니다 — 화성·수원 인테리어 전문',
+    title: '아르젠 스튜디오',
+    description: '재료와 빛, 그리고 머무는 사람.',
     locale: 'ko_KR',
     type: 'website',
     siteName: '아르젠 스튜디오',
@@ -48,8 +42,15 @@ export default function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${playfair.variable} ${dmSans.variable} h-full antialiased`}
+      className={`${ebGaramond.variable} h-full antialiased`}
     >
+      <head>
+        {/* Pretendard Variable — 한국 디자인 업계의 본질 폰트 */}
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-warm-100 text-dark">
         <I18nProvider>
           <Preloader />

@@ -159,19 +159,19 @@ export default function Header() {
         }`}
         style={{ paddingTop: 76 }}
       >
-        <ul className="flex flex-col px-8 pt-10 gap-2">
+        <ul className="flex flex-col px-[clamp(1.5rem,8vw,3rem)] pt-12 gap-3">
           {navLinks.map((link) => (
             <li key={link.href}>
               <button
                 onClick={() => scrollTo(link.href)}
-                className="w-full text-left font-serif text-[2.4rem] leading-tight py-2 text-dark hover:text-warm-700 transition-colors"
+                className="w-full text-left font-serif text-[clamp(2.4rem,9vw,3.4rem)] leading-[1.05] py-3 text-dark hover:text-warm-700 active:text-warm-700 transition-colors min-h-[56px]"
               >
                 {t(dict[link.key].ko, dict[link.key].en)}
               </button>
             </li>
           ))}
         </ul>
-        <div className="px-8 pb-12">
+        <div className="px-[clamp(1.5rem,8vw,3rem)] pb-[max(3rem,env(safe-area-inset-bottom))]">
           <button
             onClick={toggle}
             className="font-sans text-xs font-medium tracking-[0.2em] uppercase text-warm-600"

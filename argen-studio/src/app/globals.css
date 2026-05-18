@@ -51,7 +51,26 @@ body {
   font-feature-settings: 'ss01', 'ss02', 'tnum';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* 모바일: iOS tap highlight 제거, 텍스트 사이즈 조정 자동화 X */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-text-size-adjust: 100%;
 }
+
+/* 모바일 — 한글 본문은 시스템 16px보다 살짝 크게 (가독성) */
+@media (max-width: 640px) {
+  body { font-size: 15px; line-height: 1.65; }
+}
+
+/* iOS Safe Area — 노치 대응 */
+@supports (padding: max(0px)) {
+  body {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+/* 모든 버튼·링크의 tap highlight 제거 */
+a, button { -webkit-tap-highlight-color: transparent; }
 
 /* ── SCROLLBAR — 침묵 (골드 제거) ────────────────────── */
 ::-webkit-scrollbar { width: 4px; }

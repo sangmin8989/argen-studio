@@ -108,11 +108,11 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.2 }}
             >
-              <span className="block h-[1px] w-10 bg-warm-300/60" />
-              <span className="font-sans text-xs font-medium tracking-[0.25em] uppercase text-warm-300">
+              <span className="block h-px w-8 sm:w-10 bg-warm-200/50" />
+              <span className="font-sans text-[11px] sm:text-xs font-medium tracking-[0.28em] uppercase text-warm-200">
                 {t(dict['hero.eyebrow'].ko, dict['hero.eyebrow'].en)}
               </span>
-              <span className="block h-[1px] w-10 bg-warm-300/60" />
+              <span className="block h-px w-8 sm:w-10 bg-warm-200/50" />
             </motion.div>
 
             {/* Headline — ARtistic GENesis (character split animation) */}
@@ -121,7 +121,7 @@ export default function Hero() {
                 {['A', 'R'].map((char, i) => (
                   <motion.span
                     key={`ar-${i}`}
-                    className="font-serif text-[clamp(3rem,7.5vw,6rem)] font-normal tracking-[-0.01em] text-warm-100 inline-block"
+                    className="font-serif text-[clamp(4.5rem,18vw,7rem)] font-normal tracking-[-0.02em] text-warm-100 inline-block"
                     initial={{ y: '100%', opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.5 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
@@ -132,7 +132,7 @@ export default function Hero() {
                 {['t', 'i', 's', 't', 'i', 'c'].map((char, i) => (
                   <motion.span
                     key={`tistic-${i}`}
-                    className="font-sans text-[clamp(1rem,2.5vw,1.8rem)] font-medium tracking-[0.18em] text-warm-100 inline-block"
+                    className="font-sans text-[clamp(1.3rem,4vw,1.8rem)] font-light tracking-[0.18em] text-warm-100/90 inline-block"
                     initial={{ y: '100%', opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.66 + i * 0.05, ease: [0.16, 1, 0.3, 1] }}
@@ -145,7 +145,7 @@ export default function Hero() {
                 {['G', 'E', 'N'].map((char, i) => (
                   <motion.span
                     key={`gen-${i}`}
-                    className="font-serif text-[clamp(2.6rem,6.5vw,5.2rem)] font-normal tracking-[-0.01em] text-warm-100 inline-block"
+                    className="font-serif text-[clamp(4rem,16vw,6.2rem)] font-normal tracking-[-0.02em] text-warm-100 inline-block"
                     initial={{ y: '100%', opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 0.9 + i * 0.08, ease: [0.16, 1, 0.3, 1] }}
@@ -156,7 +156,7 @@ export default function Hero() {
                 {['e', 's', 'i', 's'].map((char, i) => (
                   <motion.span
                     key={`esis-${i}`}
-                    className="font-sans text-[clamp(1rem,2.5vw,1.8rem)] font-medium tracking-[0.18em] text-warm-100 inline-block"
+                    className="font-sans text-[clamp(1.3rem,4vw,1.8rem)] font-light tracking-[0.18em] text-warm-100/90 inline-block"
                     initial={{ y: '100%', opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ duration: 0.6, delay: 1.14 + i * 0.05, ease: [0.16, 1, 0.3, 1] }}
@@ -169,7 +169,7 @@ export default function Hero() {
 
             {/* Tagline — 시 한 줄 */}
             <motion.p
-              className="font-sans text-[clamp(0.85rem,1.6vw,1.05rem)] font-light text-warm-200/80 mb-12 tracking-[0.12em]"
+              className="font-sans text-[clamp(1rem,2vw,1.15rem)] font-light text-warm-200/80 mt-8 mb-14 tracking-[0.08em] px-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.8 }}
@@ -184,7 +184,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 1.0 }}
             >
-              <MagneticButton onClick={() => scrollTo('#portfolio')} className="px-9 py-4 border border-warm-100/40 text-warm-100 font-sans font-medium text-[11px] tracking-[0.22em] uppercase rounded-none hover:bg-warm-100/5 transition-colors duration-500">
+              <MagneticButton onClick={() => scrollTo('#portfolio')} className="min-h-[48px] px-10 py-4 border border-warm-100/40 text-warm-100 font-sans font-medium text-[13px] sm:text-xs tracking-[0.24em] uppercase rounded-none hover:bg-warm-100/5 active:bg-warm-100/10 transition-colors duration-500">
                 {t(dict['hero.cta2'].ko, dict['hero.cta2'].en)}
               </MagneticButton>
             </motion.div>

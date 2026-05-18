@@ -66,6 +66,7 @@ const dict = {
   'portfolio.apartment': { ko: '아파트', en: 'Apartment' },
   'portfolio.commercial': { ko: '상업공간', en: 'Commercial' },
   'portfolio.church': { ko: '교회', en: 'Church' },
+  'portfolio.residential': { ko: '주거', en: 'Residential' },
   'portfolio.empty': { ko: '준비 중입니다.', en: 'Coming soon.' },
   'portfolio.back': { ko: '← 포트폴리오', en: '← Portfolio' },
   'portfolio.location': { ko: '위치', en: 'Location' },

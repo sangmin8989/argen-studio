@@ -5,7 +5,7 @@ import { useLang } from '@/lib/i18n';
 import dict from '@/lib/dict';
 
 const services = [
-  { num: '01', title: 'services.exterior' as const, desc: 'services.exteriorDesc' as const, image: '/images/portfolio/exterior/cheongwaok-exterior/hero/exterior-cheongwaok-exterior-05-hero.webp' },
+  { num: '01', title: 'services.exterior' as const, desc: 'services.exteriorDesc' as const, image: '/images/portfolio/exterior/star-sports-exterior/night-corner-edited.png' },
   { num: '02', title: 'services.commercial' as const, desc: 'services.commercialDesc' as const, image: '/images/services/service-commercial.jpg' },
   { num: '03', title: 'services.hospital' as const, desc: 'services.hospitalDesc' as const, image: '/images/services/service-hospital.jpg' },
 ];
@@ -31,9 +31,9 @@ export default function Services() {
       <div className="pt-[clamp(3rem,6vw,5rem)]">
         {services.map((svc, i) => (
           <div key={svc.num} className={`flex flex-col ${i % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} reveal`}>
-            <div className="relative w-full md:w-1/2 aspect-[4/3] md:aspect-auto md:min-h-[480px] overflow-hidden reveal-image">
-              <Image src={svc.image} alt={t(dict[svc.title].ko, dict[svc.title].en)} fill sizes="(max-width: 768px) 100vw, 50vw" className="object-cover transition-transform duration-700 hover:scale-105" />
-              <div className="absolute inset-0 bg-dark/20" />
+            <div className={`relative w-full md:w-1/2 overflow-hidden reveal-image ${svc.title === 'services.exterior' ? 'aspect-[4/3] md:self-center' : 'aspect-[4/3] md:aspect-auto md:min-h-[480px]'}`}>
+              <Image src={svc.image} alt={t(dict[svc.title].ko, dict[svc.title].en)} fill sizes="(max-width: 768px) 100vw, 50vw" className={svc.title === 'services.exterior' ? 'object-contain' : 'object-cover transition-transform duration-700 hover:scale-105'} />
+              {svc.title !== 'services.exterior' && <div className="absolute inset-0 bg-dark/20" />}
             </div>
             <div className="w-full md:w-1/2 flex items-center bg-charcoal px-[clamp(2rem,6vw,5rem)] py-16">
               <div>

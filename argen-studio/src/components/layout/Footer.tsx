@@ -1,12 +1,15 @@
 'use client';
 
+import Link from 'next/link';
 import { useLang } from '@/lib/i18n';
 import dict from '@/lib/dict';
 
+// about/portfolio/services 섹션은 홈에만 있으므로 상세 페이지에서도 동작하도록 '/' 를 붙인다.
+// (#contact 는 푸터 자신이라 모든 페이지에 존재)
 const menuLinks = [
-  { href: '#about', key: 'nav.about' as const },
-  { href: '#portfolio', key: 'nav.portfolio' as const },
-  { href: '#services', key: 'nav.services' as const },
+  { href: '/#about', key: 'nav.about' as const },
+  { href: '/#portfolio', key: 'nav.portfolio' as const },
+  { href: '/#services', key: 'nav.services' as const },
   { href: '#contact', key: 'nav.contact' as const },
 ];
 
@@ -38,9 +41,9 @@ export default function Footer() {
             <ul className="space-y-3">
               {menuLinks.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="font-sans text-sm text-warm-400 hover:text-warm-200 transition-colors">
+                  <Link href={link.href} className="font-sans text-sm text-warm-400 hover:text-warm-200 transition-colors">
                     {t(dict[link.key].ko, dict[link.key].en)}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -66,9 +69,6 @@ export default function Footer() {
               </p>
               <a href="tel:031-8043-7966" className="block font-sans text-sm text-warm-400 hover:text-warm-200 transition-colors mt-3">
                 031-8043-7966
-              </a>
-              <a href="mailto:contact@argen.co.kr" className="block font-sans text-sm text-warm-400 hover:text-warm-200 transition-colors">
-                contact@argen.co.kr
               </a>
             </address>
           </div>

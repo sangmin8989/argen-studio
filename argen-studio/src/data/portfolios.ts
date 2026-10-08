@@ -23,6 +23,7 @@ export interface PortfolioProject {
   featured: boolean;
   completedAt: string;
   cardImageIndex?: number; // 카드 썸네일에 사용할 이미지 번호 (기본: 1)
+  relatedProjectSlug?: string;
   /**
    * 신규 단순 형식 프로젝트의 이미지 파일명 목록.
    * 있으면: /images/portfolio/[category]/[slug]/[images[i]] 로 해석
@@ -44,8 +45,57 @@ export const categoryLabels: Record<PortfolioCategory | 'all', string> = {
 const seq = (count: number, ext: string): string[] =>
   Array.from({ length: count }, (_, i) => `${String(i + 1).padStart(2, '0')}.${ext}`);
 
+const starSportsExteriorImages = [
+  'night-corner-edited.png',
+  'night-front-edited.png',
+  'night-street-edited.png',
+  'night-facade-edited.png',
+  'night-pattern-edited.png',
+  'night-entry-edited.png',
+  'day-front-clean.png',
+  'day-close-edited.png',
+  'day-street-edited.png',
+  'day-corner-edited.png',
+  'day-dusk-corner-edited.png',
+];
+
 export const portfolios: PortfolioProject[] = [
   // ─── 기존 (legacy sized 형식) ─────────────────────
+  {
+    slug: 'star-sports',
+    category: 'commercial',
+    title: { ko: '스타스포츠', en: 'Star Sports' },
+    location: { ko: '서울 을지로', en: 'Euljiro, Seoul' },
+    year: 2026,
+    description: { ko: '', en: '' },
+    imageCount: starSportsExteriorImages.length + 8,
+    featured: true,
+    completedAt: '2026-10',
+    cardImageIndex: 1,
+    images: [
+      'day-front-clean.png',
+      ...starSportsExteriorImages.filter((image) => image !== 'day-front-clean.png'),
+      ...Array.from({ length: 8 }, (_, i) => `interior-${String(i + 7).padStart(2, '0')}.webp`),
+    ],
+    relatedProjectSlug: 'star-sports-exterior',
+  },
+  {
+    slug: 'star-sports-exterior',
+    category: 'exterior',
+    title: { ko: '스타스포츠 외장 리모델링', en: 'Star Sports Exterior Remodeling' },
+    location: { ko: '서울 을지로', en: 'Euljiro, Seoul' },
+    year: 2026,
+    description: {
+      ko: '입체적인 파사드 패턴과 조명, 브랜드 간판과 출입구. 정면 전경부터 재료의 디테일까지 스타스포츠의 낮과 밤을 담았습니다.',
+      en: 'A dimensional facade pattern, lighting, brand signage and entrance. Explore Star Sports by day and night, from the front elevation to material details.',
+    },
+    imageCount: starSportsExteriorImages.length,
+    featured: true,
+    completedAt: '2026-10',
+    cardImageIndex: 1,
+    images: starSportsExteriorImages,
+    relatedProjectSlug: 'star-sports',
+  },
   {
     slug: 'golfzon-dongtan-central',
     category: 'commercial',
@@ -150,7 +200,7 @@ export const portfolios: PortfolioProject[] = [
     imageCount: 15,
     featured: true,
     completedAt: '2026-05',
-    images: ['01.jpeg', '02.jpeg', '03.jpg', '04.jpeg', '05.jpeg', '06.jpg', '07.jpg', '08.jpg', '09.jpg', '10.jpeg', '11.jpg', '12.jpg', '13.jpg', '14.jpg', '15.jpeg'],
+    images: seq(15, 'webp'),
   },
   {
     slug: 'afternoontap',
@@ -162,7 +212,7 @@ export const portfolios: PortfolioProject[] = [
     imageCount: 15,
     featured: true,
     completedAt: '2026-05',
-    images: seq(15, 'jpeg'),
+    images: seq(15, 'webp'),
   },
   {
     slug: 'gung-kkwabaegi',
@@ -174,7 +224,7 @@ export const portfolios: PortfolioProject[] = [
     imageCount: 14,
     featured: true,
     completedAt: '2025-12',
-    images: seq(14, 'jpg'),
+    images: seq(14, 'webp'),
   },
   {
     slug: 'office-hanam-50',
@@ -186,8 +236,8 @@ export const portfolios: PortfolioProject[] = [
     imageCount: 10,
     featured: true,
     completedAt: '2025-12',
-    // 01: jpg(main), 02~10: png(after/before)
-    images: ['01.jpg', '02.png', '03.png', '04.png', '05.png', '06.png', '07.png', '08.png', '09.png', '10.png'],
+    // 01: 메인, 02~10: after/before
+    images: seq(10, 'webp'),
   },
   {
     slug: 'church-library',
@@ -199,7 +249,7 @@ export const portfolios: PortfolioProject[] = [
     imageCount: 6,
     featured: true,
     completedAt: '2025-12',
-    images: seq(6, 'jpg'),
+    images: seq(6, 'webp'),
   },
   {
     slug: 'apt-34',
@@ -212,7 +262,7 @@ export const portfolios: PortfolioProject[] = [
     featured: true,
     completedAt: '2024-12',
     // 큐레이션 순서: AFTER 완성(메인) → 디테일 → BEFORE/공사중
-    images: ['01.png', '02.png', '03.png', '04.png', '05.jpg', '06.png', '07.png', '08.jpg', '09.jpg', '10.jpg', '11.jpg'],
+    images: seq(11, 'webp'),
   },
 ];
 

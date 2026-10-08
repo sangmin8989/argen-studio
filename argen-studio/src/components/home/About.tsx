@@ -44,7 +44,7 @@ export default function About() {
             <span className="inline-block font-sans text-xs font-medium tracking-[0.2em] uppercase text-accent mb-4">
               {t(dict['about.label'].ko, dict['about.label'].en)}
             </span>
-            <h2 className="font-serif text-[clamp(1.75rem,3.5vw,3rem)] font-bold text-dark mb-6 leading-tight">
+            <h2 className="font-serif text-[clamp(1.5rem,2.5vw,2.5rem)] font-bold text-dark mb-6 leading-snug whitespace-pre-line break-keep">
               {t(dict['about.headline1'].ko, dict['about.headline1'].en)}<br />
               {t(dict['about.headline2'].ko, dict['about.headline2'].en)}
             </h2>

@@ -6,19 +6,32 @@ export default function Preloader() {
   const [phase, setPhase] = useState<'show' | 'exit' | 'done'>('show');
 
   useEffect(() => {
-    if (sessionStorage.getItem('preloaded')) {
-      setPhase('done');
-      return;
+    // 저장소 접근이 막힌 환경(사생활 보호 모드, 쿠키/저장소 차단, 샌드박스 iframe)에서는
+    // sessionStorage 접근 자체가 예외를 던진다. 그래도 로딩 화면은 반드시 끝나야 한다.
+    let seen = false;
+    try {
+      seen = !!window.sessionStorage.getItem('preloaded');
+    } catch {
+      seen = false;
     }
-    const exitTimer = setTimeout(() => setPhase('exit'), 4000);
-    const doneTimer = setTimeout(() => {
-      setPhase('done');
-      sessionStorage.setItem('preloaded', '1');
-    }, 5200);
-    return () => {
-      clearTimeout(exitTimer);
-      clearTimeout(doneTimer);
-    };
+
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    if (seen) {
+      timers.push(setTimeout(() => setPhase('done'), 0));
+    } else {
+      timers.push(setTimeout(() => setPhase('exit'), 4000));
+      timers.push(
+        setTimeout(() => {
+          setPhase('done');
+          try {
+            window.sessionStorage.setItem('preloaded', '1');
+          } catch {
+            /* 저장 불가 환경: 다음 방문에도 로딩 화면이 나올 뿐, 동작에는 영향 없음 */
+          }
+        }, 5200)
+      );
+    }
+    return () => timers.forEach(clearTimeout);
   }, []);
 
   if (phase === 'done') return null;

@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { usePathname } from 'next/navigation';
+import { useState, useEffect, useRef } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useLang } from '@/lib/i18n';
 import dict from '@/lib/dict';
@@ -17,9 +17,17 @@ const navLinks = [
 export default function Header() {
   const { lang, toggle, t } = useLang();
   const pathname = usePathname();
+  const router = useRouter();
   const isHome = pathname === '/';
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+  const firstMenuItemRef = useRef<HTMLButtonElement>(null);
+  const wasMenuOpenRef = useRef(false);
+
+  // 밝은 배경 위에서는 어두운 글자색을 쓴다:
+  // 스크롤했을 때 / 히어로(어두운 배경)가 없는 상세 페이지 / 밝은 모바일 메뉴가 열렸을 때
+  const solid = scrolled || !isHome || menuOpen;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -40,13 +48,32 @@ export default function Header() {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
+  // 모바일 메뉴 접근성: Escape 로 닫기, 열면 첫 항목으로 포커스, 닫으면 햄버거로 포커스 복귀
+  useEffect(() => {
+    if (!menuOpen) {
+      if (wasMenuOpenRef.current) hamburgerRef.current?.focus();
+      wasMenuOpenRef.current = false;
+      return;
+    }
+    wasMenuOpenRef.current = true;
+    const focusTimer = setTimeout(() => firstMenuItemRef.current?.focus(), 60); // inert 해제 후
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setMenuOpen(false);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => {
+      clearTimeout(focusTimer);
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [menuOpen]);
+
   const scrollTo = (href: string) => {
     setMenuOpen(false);
     if (href === '#') return;
     // works 섹션은 portfolio id로 라우팅 (id 변경 안 했으므로 호환)
     const target = href === '#works' ? '#portfolio' : href;
     if (!isHome) {
-      window.location.href = '/' + target;
+      router.push('/' + target);
       return;
     }
     const el = document.querySelector(target);
@@ -71,13 +98,13 @@ export default function Header() {
           <Link href="/" className="flex items-baseline gap-0.5 group">
             <span
               className="font-serif text-[1.6rem] leading-none transition-colors duration-500"
-              style={{ color: scrolled ? '#1C1917' : '#FAF8F5' }}
+              style={{ color: solid ? '#1C1917' : '#FAF8F5' }}
             >
               A
             </span>
             <span
               className="font-sans text-xs font-medium tracking-[0.22em] uppercase transition-colors duration-500"
-              style={{ color: scrolled ? '#1C1917' : '#FAF8F5' }}
+              style={{ color: solid ? '#1C1917' : '#FAF8F5' }}
             >
               RGEN&nbsp;STUDIO
             </span>
@@ -90,7 +117,7 @@ export default function Header() {
                 <button
                   onClick={() => scrollTo(link.href)}
                   className={`font-sans text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300 ${
-                    scrolled ? 'text-dark/70 hover:text-dark' : 'text-warm-100/70 hover:text-warm-100'
+                    solid ? 'text-dark/70 hover:text-dark' : 'text-warm-100/70 hover:text-warm-100'
                   }`}
                 >
                   {t(dict[link.key].ko, dict[link.key].en)}
@@ -104,7 +131,7 @@ export default function Header() {
             <button
               onClick={toggle}
               className={`font-sans text-[10px] font-medium tracking-[0.2em] uppercase transition-colors duration-300 ${
-                scrolled ? 'text-dark/60 hover:text-dark' : 'text-warm-100/60 hover:text-warm-100'
+                solid ? 'text-dark/60 hover:text-dark' : 'text-warm-100/60 hover:text-warm-100'
               }`}
               aria-label="언어 전환"
             >
@@ -115,11 +142,11 @@ export default function Header() {
           </div>
 
           {/* Mobile: lang + hamburger */}
-          <div className="lg:hidden flex items-center gap-4">
+          <div className="lg:hidden flex items-center gap-2">
             <button
               onClick={toggle}
-              className={`font-sans text-[10px] font-medium tracking-[0.2em] uppercase transition-colors ${
-                scrolled ? 'text-dark/60 hover:text-dark' : 'text-warm-100/60 hover:text-warm-100'
+              className={`min-h-11 min-w-14 font-sans text-xs font-medium tracking-[0.12em] uppercase transition-colors ${
+                solid ? 'text-dark/60 hover:text-dark' : 'text-warm-100/60 hover:text-warm-100'
               }`}
               aria-label="언어 전환"
             >
@@ -128,23 +155,26 @@ export default function Header() {
               <span className={lang === 'en' ? 'font-semibold' : ''}>EN</span>
             </button>
             <button
+              ref={hamburgerRef}
               onClick={() => setMenuOpen((v) => !v)}
               aria-label={menuOpen ? '메뉴 닫기' : '메뉴 열기'}
-              className="flex flex-col justify-center gap-[5px] w-8 h-8 p-1"
+              aria-expanded={menuOpen}
+              aria-controls="mobile-menu"
+              className="flex flex-col justify-center gap-[5px] w-11 h-11 p-2.5"
             >
               <span
                 className={`block h-[1px] rounded-none transition-all duration-300 origin-center ${
-                  scrolled ? 'bg-dark' : 'bg-warm-100'
+                  solid ? 'bg-dark' : 'bg-warm-100'
                 } ${menuOpen ? 'rotate-45 translate-y-[6px]' : ''}`}
               />
               <span
                 className={`block h-[1px] rounded-none transition-all duration-300 ${
-                  scrolled ? 'bg-dark' : 'bg-warm-100'
+                  solid ? 'bg-dark' : 'bg-warm-100'
                 } ${menuOpen ? 'opacity-0' : ''}`}
               />
               <span
                 className={`block h-[1px] rounded-none transition-all duration-300 origin-center ${
-                  scrolled ? 'bg-dark' : 'bg-warm-100'
+                  solid ? 'bg-dark' : 'bg-warm-100'
                 } ${menuOpen ? '-rotate-45 -translate-y-[6px]' : ''}`}
               />
             </button>
@@ -153,18 +183,22 @@ export default function Header() {
       </nav>
 
       {/* Mobile menu — 풀스크린 침묵 */}
+      {/* 닫힌 동안은 inert: 화면 밖으로 밀려나 있어도 Tab 포커스·스크린리더가 닿지 않게 한다 */}
       <div
-        className={`fixed inset-0 z-40 bg-warm-100 flex flex-col justify-between transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+        id="mobile-menu"
+        inert={!menuOpen}
+        className={`fixed inset-0 z-40 bg-warm-100 flex flex-col justify-between overflow-y-auto overscroll-contain transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
           menuOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
         style={{ paddingTop: 76 }}
       >
-        <ul className="flex flex-col px-[clamp(1.5rem,8vw,3rem)] pt-12 gap-3">
-          {navLinks.map((link) => (
+        <ul className="flex flex-col px-[clamp(1.5rem,8vw,3rem)] pt-[clamp(1rem,5svh,3rem)] gap-3">
+          {navLinks.map((link, i) => (
             <li key={link.href}>
               <button
+                ref={i === 0 ? firstMenuItemRef : undefined}
                 onClick={() => scrollTo(link.href)}
-                className="w-full text-left font-serif text-[clamp(2.4rem,9vw,3.4rem)] leading-[1.05] py-3 text-dark hover:text-warm-700 active:text-warm-700 transition-colors min-h-[56px]"
+                className="w-full text-left font-serif text-[clamp(1.5rem,5.5vw,2rem)] leading-[1.3] py-2 text-dark hover:text-warm-700 active:text-warm-700 transition-colors min-h-[48px]"
               >
                 {t(dict[link.key].ko, dict[link.key].en)}
               </button>

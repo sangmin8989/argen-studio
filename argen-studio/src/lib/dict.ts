@@ -19,11 +19,11 @@ const dict = {
 
   // About — Studio
   'about.label': { ko: 'Studio', en: 'Studio' },
-  'about.headline1': { ko: '재료와 빛,', en: 'Material, light,' },
-  'about.headline2': { ko: '그리고 머무는 사람.', en: 'and those who stay.' },
+  'about.headline1': { ko: '매장에서는 브랜드를,\n사무실에서는 일하는 방식을,', en: 'In a store, we see the brand.\nIn an office, the way people work.' },
+  'about.headline2': { ko: '집에서는 사는 사람을 봅니다.', en: 'In a home, the people who live there.' },
   'about.desc': {
-    ko: '아르젠은 공간을 짓지 않습니다. 머무는 시간을 짓습니다. 매번 다른 사람을 위해, 매번 처음인 듯한 자세로.',
-    en: 'We do not build spaces. We build the time spent within them. For each new person, as if for the first time.',
+    ko: '아르젠 스튜디오는 상업공간과 주거, 건물 외장을 설계하고 시공합니다. 같은 재료도 누가 쓰고 무엇을 하는 공간인지에 따라 다르게 다룹니다. 우리의 작업이 서로 다른 모습인 이유입니다.',
+    en: 'ARGEN Studio designs and builds commercial spaces, homes and building exteriors. We approach the same material differently depending on who uses a space and what happens there. That is why each of our projects takes a different form.',
   },
   'about.s1.title': { ko: '재료의 안목', en: 'A Sense for Material' },
   'about.s1.desc': { ko: '우드, 석재, 금속, 패브릭. 우리는 재료를 고르지 않고 만납니다.', en: 'Wood, stone, metal, fabric — we do not choose materials, we meet them.' },

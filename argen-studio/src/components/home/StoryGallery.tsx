@@ -2,6 +2,7 @@
 
 import { useState, useCallback, useRef, useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLang } from '@/lib/i18n';
 import { portfolios, getPortfolioImagePath } from '@/data/portfolios';
@@ -17,6 +18,8 @@ export default function StoryGallery() {
   const [showInfo, setShowInfo] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchStartRef = useRef<{ x: number; y: number; time: number } | null>(null);
+  // 터치 직후 브라우저가 합성하는 click 이 같은 탭을 한 번 더 처리하지 않도록 기록
+  const lastTouchEndRef = useRef(0);
 
   const project = featured[projectIdx];
   const maxImages = Math.min(project.imageCount, 6); // cap at 6 per story
@@ -67,27 +70,32 @@ export default function StoryGallery() {
   };
 
   const handleTouchEnd = (e: React.TouchEvent) => {
+    lastTouchEndRef.current = Date.now();
     if (!touchStartRef.current) return;
     const dx = e.changedTouches[0].clientX - touchStartRef.current.x;
     const dy = e.changedTouches[0].clientY - touchStartRef.current.y;
     const dt = Date.now() - touchStartRef.current.time;
+    const isTap = dt < 300 && Math.abs(dx) < 20 && Math.abs(dy) < 20;
+    const onSheet = !!(e.target as HTMLElement).closest('[data-story-sheet]');
+    touchStartRef.current = null;
 
+    // 상세 시트가 열려 있으면: 아래로 스와이프하거나 시트 밖을 탭할 때만 닫고, 사진은 넘기지 않는다
+    if (showInfo) {
+      if ((dy > 60 && Math.abs(dx) < Math.abs(dy)) || (isTap && !onSheet)) setShowInfo(false);
+      return;
+    }
     // Swipe up → show info
     if (dy < -60 && Math.abs(dx) < Math.abs(dy)) {
       setShowInfo(true);
       return;
     }
-    // Swipe down → hide info
-    if (dy > 60 && showInfo) {
-      setShowInfo(false);
-      return;
-    }
     // Quick tap (not swipe) → left/right navigation
-    if (dt < 300 && Math.abs(dx) < 20 && Math.abs(dy) < 20) {
+    if (isTap) {
       const tapX = e.changedTouches[0].clientX;
       const screenW = window.innerWidth;
       if (tapX > screenW * 0.5) goNext();
       else goPrev();
+      return;
     }
     // Horizontal swipe → project navigation
     if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
@@ -106,6 +114,13 @@ export default function StoryGallery() {
 
   // Desktop click navigation
   const handleClick = (e: React.MouseEvent) => {
+    // 터치로 이미 처리된 탭에 이어 합성된 click 은 무시
+    if (Date.now() - lastTouchEndRef.current < 700) return;
+    // 상세 시트가 열려 있으면 바깥 클릭은 시트를 닫기만 한다
+    if (showInfo) {
+      setShowInfo(false);
+      return;
+    }
     const clickX = e.clientX;
     const rect = e.currentTarget.getBoundingClientRect();
     if (clickX > rect.left + rect.width * 0.5) goNext();
@@ -220,6 +235,7 @@ export default function StoryGallery() {
         <AnimatePresence>
           {showInfo && (
             <motion.div
+              data-story-sheet
               className="absolute inset-x-0 bottom-0 z-30 bg-warm-50 rounded-t-2xl p-6"
               initial={{ y: '100%' }}
               animate={{ y: 0 }}
@@ -239,9 +255,15 @@ export default function StoryGallery() {
                   {t(`면적: ${project.area}`, `Area: ${project.area}`)}
                 </p>
               )}
+              <Link
+                href={`/portfolio/${project.slug}`}
+                className="block w-full py-3 bg-accent text-warm-50 text-center font-sans font-medium text-sm rounded-lg mt-2"
+              >
+                {t('프로젝트 보기', 'View project')}
+              </Link>
               <button
                 onClick={() => setShowInfo(false)}
-                className="w-full py-3 bg-accent text-warm-50 font-sans font-medium text-sm rounded-lg mt-2"
+                className="w-full py-3 border border-warm-300 text-warm-600 font-sans font-medium text-sm rounded-lg mt-2"
               >
                 {t('닫기', 'Close')}
               </button>

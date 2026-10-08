@@ -1,22 +1,14 @@
 'use client';
 
-import { useEffect, useState, type ReactNode } from 'react';
+import { type ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 
+// 경로가 바뀔 때마다 key 로 래퍼를 새로 마운트해서 CSS 진입 애니메이션(pageEnter)을 다시 재생한다.
 export default function PageTransition({ children }: { children: ReactNode }) {
   const pathname = usePathname();
-  const [stage, setStage] = useState<'enter' | 'active'>('active');
-
-  useEffect(() => {
-    setStage('enter');
-    const timer = setTimeout(() => setStage('active'), 30);
-    return () => clearTimeout(timer);
-  }, [pathname]);
 
   return (
-    <div
-      className={stage === 'enter' ? 'page-transition-enter' : 'page-transition-active'}
-    >
+    <div key={pathname} className="page-transition-active">
       {children}
     </div>
   );

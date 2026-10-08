@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, lazy, Suspense } from 'react';
+import { useRef, lazy, Suspense, useSyncExternalStore } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useLang } from '@/lib/i18n';
 import dict from '@/lib/dict';
@@ -12,10 +12,19 @@ const ShaderGradientCanvas = lazy(() =>
 const ShaderGradient = lazy(() =>
   import('shadergradient').then((m) => ({ default: m.ShaderGradient }))
 );
+const shaderQuery = '(min-width: 768px) and (pointer: fine) and (prefers-reduced-motion: no-preference)';
+function subscribeShader(callback: () => void) {
+  const query = window.matchMedia(shaderQuery);
+  query.addEventListener('change', callback);
+  return () => query.removeEventListener('change', callback);
+}
+const shaderSnapshot = () => window.matchMedia(shaderQuery).matches;
+const serverShaderSnapshot = () => false;
 
 export default function Hero() {
   const { t } = useLang();
   const sectionRef = useRef<HTMLElement>(null);
+  const enableShader = useSyncExternalStore(subscribeShader, shaderSnapshot, serverShaderSnapshot);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -41,12 +50,12 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="relative w-full h-[140vh] min-h-[800px]"
+      className="relative w-full h-[100svh] min-h-[480px] md:h-[140vh] md:min-h-[800px]"
       style={{ background: '#FAF8F5' }}
     >
       {/* Sticky inner container — stays in viewport while section scrolls */}
       <motion.div
-        className="sticky top-0 w-full h-screen min-h-[600px] overflow-hidden"
+        className="sticky top-0 w-full h-[100svh] min-h-[480px] md:h-screen md:min-h-[600px] overflow-hidden"
         style={{
           scale: maskScale,
           borderRadius: useTransform(maskRadius, (v) => `${v}px`),
@@ -54,8 +63,8 @@ export default function Hero() {
         }}
       >
         {/* Shader gradient background — GPU-powered 3D gradient */}
-        <div className="absolute inset-0 z-0">
-          <Suspense fallback={null}>
+        <div className="absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse at 20% 20%, #9c5c58, transparent 65%), radial-gradient(ellipse at 80% 80%, #8b6914, transparent 70%), #6a3b3a' }}>
+          {enableShader ? <Suspense fallback={null}>
             <ShaderGradientCanvas
               style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
             >
@@ -89,7 +98,7 @@ export default function Hero() {
                 cameraZoom={1}
               />
             </ShaderGradientCanvas>
-          </Suspense>
+          </Suspense> : null}
         </div>
 
         {/* Dark overlay for text readability */}

@@ -38,7 +38,14 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
-  overflow-x: hidden;
+}
+
+/* 가로 넘침 차단. html·body 에 overflow-x: hidden 을 같이 두면 body 가 스크롤 컨테이너가 되어
+   position: sticky 가 먹지 않고(히어로 고정 연출이 깨짐) 모바일 스크롤 감촉도 나빠진다.
+   clip 은 스크롤 컨테이너를 만들지 않고 같은 효과를 낸다. */
+html, body { overflow-x: hidden; }
+@supports (overflow-x: clip) {
+  html, body { overflow-x: clip; }
 }
 
 body {
@@ -47,7 +54,6 @@ body {
   background-color: #FAF8F5;
   color: #1C1917;
   line-height: 1.6;
-  overflow-x: hidden;
   font-feature-settings: 'ss01', 'ss02', 'tnum';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

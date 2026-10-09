@@ -1,7 +1,7 @@
 'use client';
 
-import { useRef, lazy, Suspense, useSyncExternalStore } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useRef, useState, lazy, Suspense, useSyncExternalStore } from 'react';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'framer-motion';
 import { navigateWithTransition } from '@/lib/transition';
 import { useLang } from '@/lib/i18n';
 import dict from '@/lib/dict';
@@ -22,10 +22,21 @@ function subscribeShader(callback: () => void) {
 const shaderSnapshot = () => window.matchMedia(shaderQuery).matches;
 const serverShaderSnapshot = () => false;
 
+// 스크롤에 맞춰 화면이 줄어들며 사라지는 연출은 히어로가 고정(sticky)되는 데스크톱 전용이다.
+// 모바일은 히어로가 고정되지 않고 그대로 올라가므로, 같은 연출을 얹으면 이중으로 움직여 어색하다.
+const cinematicQuery = '(min-width: 768px)';
+function subscribeCinematic(callback: () => void) {
+  const query = window.matchMedia(cinematicQuery);
+  query.addEventListener('change', callback);
+  return () => query.removeEventListener('change', callback);
+}
+const cinematicSnapshot = () => window.matchMedia(cinematicQuery).matches;
+
 export default function Hero() {
   const { t } = useLang();
   const sectionRef = useRef<HTMLElement>(null);
   const enableShader = useSyncExternalStore(subscribeShader, shaderSnapshot, serverShaderSnapshot);
+  const cinematic = useSyncExternalStore(subscribeCinematic, cinematicSnapshot, serverShaderSnapshot);
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -40,6 +51,14 @@ export default function Hero() {
   const maskScale = useTransform(scrollYProgress, [0, 0.6], [1, 0.85]);
   const maskRadius = useTransform(scrollYProgress, [0, 0.6], [0, 32]);
   const maskOpacity = useTransform(scrollYProgress, [0.5, 0.8], [1, 0]);
+  const maskRadiusPx = useTransform(maskRadius, (v) => `${v}px`);
+
+  // 화면 밖으로 완전히 사라진(투명도 0) 뒤에는 3D 배경 렌더링을 멈춰서 스크롤 중 GPU 부담을 줄인다
+  const [shaderVisible, setShaderVisible] = useState(true);
+  useMotionValueEvent(scrollYProgress, 'change', (v) => {
+    const visible = v < 0.85;
+    setShaderVisible((prev) => (prev === visible ? prev : visible));
+  });
 
   return (
     <section
@@ -51,15 +70,11 @@ export default function Hero() {
       {/* Sticky inner container — stays in viewport while section scrolls */}
       <motion.div
         className="sticky top-0 w-full h-[100svh] min-h-[480px] md:h-screen md:min-h-[600px] overflow-hidden"
-        style={{
-          scale: maskScale,
-          borderRadius: useTransform(maskRadius, (v) => `${v}px`),
-          opacity: maskOpacity,
-        }}
+        style={cinematic ? { scale: maskScale, borderRadius: maskRadiusPx, opacity: maskOpacity } : undefined}
       >
         {/* Shader gradient background — GPU-powered 3D gradient */}
         <div className="absolute inset-0 z-0" style={{ background: 'radial-gradient(ellipse at 20% 20%, #9c5c58, transparent 65%), radial-gradient(ellipse at 80% 80%, #8b6914, transparent 70%), #6a3b3a' }}>
-          {enableShader ? <Suspense fallback={null}>
+          {enableShader && shaderVisible ? <Suspense fallback={null}>
             <ShaderGradientCanvas
               style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
             >
@@ -102,7 +117,7 @@ export default function Hero() {
         {/* Content */}
         <motion.div
           className="relative z-[2] h-full flex items-center justify-center text-center px-6 max-w-3xl mx-auto"
-          style={{ y: contentY, opacity: contentOpacity }}
+          style={cinematic ? { y: contentY, opacity: contentOpacity } : undefined}
         >
           <div>
             {/* Eyebrow */}
@@ -201,7 +216,7 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.5 }}
-          style={{ opacity: contentOpacity }}
+          style={cinematic ? { opacity: contentOpacity } : undefined}
         >
           <span className="font-sans text-xs tracking-[0.3em] uppercase text-warm-300/80">
             {t('스크롤', 'Scroll')}

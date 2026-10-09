@@ -76,17 +76,15 @@ export default function StoryGallery() {
     const dy = e.changedTouches[0].clientY - touchStartRef.current.y;
     const dt = Date.now() - touchStartRef.current.time;
     const isTap = dt < 300 && Math.abs(dx) < 20 && Math.abs(dy) < 20;
-    const onSheet = !!(e.target as HTMLElement).closest('[data-story-sheet]');
+    const target = e.target as HTMLElement;
+    const onSheet = !!target.closest('[data-story-sheet]');
     touchStartRef.current = null;
+    // '자세히 보기' 버튼 탭은 버튼이 처리한다 (사진 넘김으로 이어지지 않게)
+    if (target.closest('[data-story-action]')) return;
 
     // 상세 시트가 열려 있으면: 아래로 스와이프하거나 시트 밖을 탭할 때만 닫고, 사진은 넘기지 않는다
     if (showInfo) {
-      if ((dy > 60 && Math.abs(dx) < Math.abs(dy)) || (isTap && !onSheet)) setShowInfo(false);
-      return;
-    }
-    // Swipe up → show info
-    if (dy < -60 && Math.abs(dx) < Math.abs(dy)) {
-      setShowInfo(true);
+      if ((onSheet && dy > 60 && Math.abs(dx) < Math.abs(dy)) || (isTap && !onSheet)) setShowInfo(false);
       return;
     }
     // Quick tap (not swipe) → left/right navigation
@@ -97,6 +95,8 @@ export default function StoryGallery() {
       else goPrev();
       return;
     }
+    // 세로 스와이프는 페이지 스크롤이다. 여기서 가로채면 스크롤하다가 시트가 열린다.
+    if (Math.abs(dy) > Math.abs(dx)) return;
     // Horizontal swipe → project navigation
     if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy)) {
       if (dx < 0 && projectIdx < featured.length - 1) {
@@ -142,7 +142,7 @@ export default function StoryGallery() {
 
       <div
         className="relative w-full aspect-[9/16] max-h-[75vh] mx-auto overflow-hidden rounded-2xl bg-dark"
-        style={{ maxWidth: '400px' }}
+        style={{ maxWidth: '400px', touchAction: 'pan-y' }}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         onClick={handleClick}
@@ -225,13 +225,18 @@ export default function StoryGallery() {
             <h3 className="font-serif text-xl font-bold text-white leading-tight">
               {project.title[lang]}
             </h3>
-            <p className="font-sans text-xs text-white/75 mt-2">
-              {t('위로 스와이프하여 자세히 보기', 'Swipe up for details')}
-            </p>
+            <button
+              type="button"
+              data-story-action
+              onClick={(e) => { e.stopPropagation(); setShowInfo(true); }}
+              className="-ml-2 mt-1 inline-flex min-h-11 items-center px-2 font-sans text-xs text-white/85 underline underline-offset-4"
+            >
+              {t('자세히 보기', 'Details')}
+            </button>
           </motion.div>
         </div>
 
-        {/* Bottom sheet (swipe up) */}
+        {/* 상세 시트: '자세히 보기' 버튼으로 연다 */}
         <AnimatePresence>
           {showInfo && (
             <motion.div

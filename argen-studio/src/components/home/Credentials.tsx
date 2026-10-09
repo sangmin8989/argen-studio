@@ -4,8 +4,9 @@ import { useLang } from '@/lib/i18n';
 
 type Bi = { ko: string; en: string };
 
-// 근거 문서: 건설업등록증(화성시장, 2026.08.25) / 특허증(지식재산처장, 2026.09.16)
-// 개인 정보(발명자 주소)와 법인등록번호는 노출하지 않는다.
+// 근거 문서: 건설업등록증(화성시장, 2026.08.25) / 옥외광고사업 등록증(화성시장, 2025.08.27) / 특허증(지식재산처장, 2026.09.16)
+// 개인 정보(발명자 주소, 등록증의 생년월일 칸)와 법인등록번호는 노출하지 않는다.
+// 옥외광고사업 등록증의 주소는 건설업등록증(본사 1층 147호)과 달라서 싣지 않는다.
 const records: {
   key: string;
   label: Bi;
@@ -20,6 +21,20 @@ const records: {
     details: [
       { term: { ko: '등록번호', en: 'Registration No.' }, value: { ko: '화성26-나-24', en: 'Hwaseong 26-Na-24' } },
       { term: { ko: '등록일', en: 'Registered' }, value: { ko: '2026. 8. 25.', en: 'Aug 25, 2026' } },
+      { term: { ko: '등록기관', en: 'Issued by' }, value: { ko: '화성시', en: 'Hwaseong City' } },
+    ],
+  },
+  {
+    key: 'outdoor-ad',
+    label: { ko: '옥외광고사업 등록', en: 'Outdoor Advertising Registration' },
+    headline: { ko: '옥외광고사업', en: 'Outdoor Advertising' },
+    title: {
+      ko: '옥외광고물 제작, 설치 및 인테리어',
+      en: 'Outdoor advertising fabrication, installation and interior',
+    },
+    details: [
+      { term: { ko: '등록번호', en: 'Registration No.' }, value: { ko: '제2025-5530606-08-5-00028호', en: 'No. 2025-5530606-08-5-00028' } },
+      { term: { ko: '등록일', en: 'Registered' }, value: { ko: '2025. 8. 27.', en: 'Aug 27, 2025' } },
       { term: { ko: '등록기관', en: 'Issued by' }, value: { ko: '화성시', en: 'Hwaseong City' } },
     ],
   },
@@ -55,8 +70,8 @@ export default function Credentials() {
           </h2>
           <p className="font-sans text-base leading-relaxed text-warm-700 mt-6 break-keep">
             {t(
-              '아르젠은 건설산업기본법에 따라 등록된 실내건축공사업체이며, 주거 리모델링의 의사결정을 돕는 시스템으로 특허를 등록했습니다.',
-              'ARGEN is a registered interior construction contractor under the Framework Act on the Construction Industry, and holds a patent for a residential remodeling decision-support system.'
+              '아르젠은 건설산업기본법에 따라 등록된 실내건축공사업체이자 옥외광고사업 등록업체이며, 주거 리모델링의 의사결정을 돕는 시스템으로 특허를 등록했습니다.',
+              'ARGEN is a registered interior construction contractor under the Framework Act on the Construction Industry and a registered outdoor advertising business, and holds a patent for a residential remodeling decision-support system.'
             )}
           </p>
         </div>

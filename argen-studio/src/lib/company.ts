@@ -12,5 +12,7 @@ export const company = {
   showroom: {
     ko: '경기도 수원시 권선로 681, 아르젠 스튜디오',
     en: '681 Gwonseon-ro, Suwon-si, ARGEN Studio',
+    // 지도 앱 검색어 (도로명 주소만)
+    mapQuery: '경기도 수원시 권선로 681',
   },
 } as const;

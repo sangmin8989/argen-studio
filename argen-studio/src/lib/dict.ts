@@ -8,6 +8,7 @@ const dict = {
   'nav.about': { ko: '회사소개', en: 'Studio' },
   'nav.services': { ko: '시공 분야', en: 'Practice' },
   'nav.portfolio': { ko: '시공 사례', en: 'Works' },
+  'nav.showroom': { ko: '쇼룸', en: 'Showroom' },
   'nav.contact': { ko: '문의', en: 'Inquiry' },
 
   // Hero — 한 줄의 시

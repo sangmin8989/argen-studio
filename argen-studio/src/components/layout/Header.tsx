@@ -11,6 +11,7 @@ const navLinks = [
   { href: '/studio', key: 'nav.about' as const },
   { href: '/portfolio', key: 'nav.portfolio' as const },
   { href: '/practice', key: 'nav.services' as const },
+  { href: '/showroom', key: 'nav.showroom' as const },
   { href: '/inquiry', key: 'nav.contact' as const },
 ];
 

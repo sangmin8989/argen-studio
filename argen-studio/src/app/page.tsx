@@ -3,6 +3,7 @@ import About from '@/components/home/About';
 import Services from '@/components/home/Services';
 import Portfolio from '@/components/home/Portfolio';
 import StoryGallery from '@/components/home/StoryGallery';
+import Credentials from '@/components/home/Credentials';
 import ScrollReveal from '@/components/ScrollReveal';
 
 export default function HomePage() {
@@ -13,7 +14,8 @@ export default function HomePage() {
       <About />
       <Services />
       <StoryGallery />
-      <Portfolio />
+      <Portfolio preview />
+      <Credentials />
     </>
   );
 }

@@ -2,6 +2,7 @@
 
 import { useRef, lazy, Suspense, useSyncExternalStore } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import { navigateWithTransition } from '@/lib/transition';
 import { useLang } from '@/lib/i18n';
 import dict from '@/lib/dict';
 import MagneticButton from '@/components/MagneticButton';
@@ -39,12 +40,6 @@ export default function Hero() {
   const maskScale = useTransform(scrollYProgress, [0, 0.6], [1, 0.85]);
   const maskRadius = useTransform(scrollYProgress, [0, 0.6], [0, 32]);
   const maskOpacity = useTransform(scrollYProgress, [0.5, 0.8], [1, 0]);
-
-  const scrollTo = (href: string) => {
-    const el = document.querySelector(href);
-    if (!el) return;
-    window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 76, behavior: 'smooth' });
-  };
 
   return (
     <section
@@ -118,7 +113,7 @@ export default function Hero() {
               transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 0.2 }}
             >
               <span className="block h-px w-8 sm:w-10 bg-warm-200/50" />
-              <span className="font-sans text-[11px] sm:text-xs font-medium tracking-[0.28em] uppercase text-warm-200">
+              <span className="font-sans text-xs font-medium tracking-[0.28em] uppercase text-warm-200">
                 {t(dict['hero.eyebrow'].ko, dict['hero.eyebrow'].en)}
               </span>
               <span className="block h-px w-8 sm:w-10 bg-warm-200/50" />
@@ -193,7 +188,7 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: 'spring', stiffness: 80, damping: 20, delay: 1.0 }}
             >
-              <MagneticButton onClick={() => scrollTo('#portfolio')} className="min-h-[48px] px-10 py-4 border border-warm-100/40 text-warm-100 font-sans font-medium text-[13px] sm:text-xs tracking-[0.24em] uppercase rounded-none hover:bg-warm-100/5 active:bg-warm-100/10 transition-colors duration-500">
+              <MagneticButton onClick={() => navigateWithTransition('/portfolio')} className="min-h-[48px] px-10 py-4 border border-warm-100/40 text-warm-100 font-sans font-medium text-[13px] sm:text-xs tracking-[0.24em] uppercase rounded-none hover:bg-warm-100/5 active:bg-warm-100/10 transition-colors duration-500">
                 {t(dict['hero.cta2'].ko, dict['hero.cta2'].en)}
               </MagneticButton>
             </motion.div>
@@ -202,13 +197,13 @@ export default function Hero() {
 
         {/* Scroll indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-[2]"
+          className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-[2]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.5 }}
           style={{ opacity: contentOpacity }}
         >
-          <span className="font-sans text-[10px] tracking-[0.3em] uppercase text-warm-300/70">
+          <span className="font-sans text-xs tracking-[0.3em] uppercase text-warm-300/80">
             {t('스크롤', 'Scroll')}
           </span>
           <div className="w-[1px] h-10 bg-warm-400/40 relative overflow-hidden">

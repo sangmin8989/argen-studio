@@ -15,21 +15,33 @@ const categories = {
 };
 type Filter = PortfolioCategory | 'all';
 
-export default function Portfolio() {
+// 홈에서는 대표작만 보여주고, 전체 목록은 /portfolio 페이지에서 보여준다.
+const PREVIEW_COUNT = 5; // 큰 카드 1 + 2열 2줄로 깔끔하게 떨어지는 개수
+
+export default function Portfolio({ preview = false, initialFilter = 'all' }: { preview?: boolean; initialFilter?: Filter }) {
   const { lang, t } = useLang();
-  const [active, setActive] = useState<Filter>('all');
-  const visible = portfolios.filter((p) => active === 'all' || p.category === active);
+  const [active, setActive] = useState<Filter>(initialFilter);
+  const filtered = portfolios.filter((p) => active === 'all' || p.category === active);
+  const visible = preview ? portfolios.slice(0, PREVIEW_COUNT) : filtered;
+  const Heading = preview ? 'h2' : 'h1';
   return (
-    <section id="portfolio" className="scroll-mt-24 bg-warm-100 py-[clamp(4rem,8vw,8rem)]">
+    <section
+      id="portfolio" /* globals.css 의 '#portfolio button[aria-pressed]' 필터 버튼 스타일이 이 id 에 의존한다 */
+      className={`scroll-mt-24 bg-warm-100 ${
+        preview
+          ? 'py-[clamp(4rem,8vw,8rem)]'
+          : 'pb-[clamp(4rem,8vw,8rem)] pt-[calc(76px+clamp(2.5rem,6vw,5rem))]'
+      }`}
+    >
       <div className="mx-auto max-w-[1440px] px-[clamp(1.25rem,5vw,4rem)]">
         <div className="mb-8 flex flex-col gap-4 md:mb-12 md:gap-6 md:flex-row md:items-end md:justify-between">
           <div>
             <p className="mb-5 font-sans text-xs tracking-[0.24em] text-warm-700">ARGEN STUDIO / SELECTED WORKS</p>
-            <h2 className="text-[clamp(2.5rem,5vw,4.5rem)] text-dark">{t('시공 사례', 'Selected Works')}</h2>
+            <Heading className="text-[clamp(2.5rem,5vw,4.5rem)] text-dark">{t('시공 사례', 'Selected Works')}</Heading>
           </div>
           <p className="max-w-sm font-sans text-sm leading-7 text-warm-700">{t('공간의 쓰임과 그 안의 일상을 생각합니다. 아르젠이 완성한 공간을 만나보세요.', 'Spaces shaped around their purpose and the lives within. Explore our completed projects.')}</p>
         </div>
-        <div className="mb-10 flex flex-wrap items-center justify-between gap-5 border-y border-warm-300 py-4">
+        {!preview && <div className="mb-10 flex flex-wrap items-center justify-between gap-5 border-y border-warm-300 py-4">
           <div className="portfolio-filters flex w-full min-w-0 gap-2 overflow-x-auto py-1 md:w-auto md:flex-wrap" role="group" aria-label={t('시공 사례 분류', 'Project categories')}>
             {(Object.keys(categories) as Filter[]).map((key) => (
               <button key={key} type="button" aria-pressed={active === key} onClick={(event) => { setActive(key); const rail = event.currentTarget.parentElement; if (rail && rail.scrollWidth > rail.clientWidth) rail.scrollTo({left: event.currentTarget.offsetLeft - rail.offsetLeft, behavior: 'smooth'}); }} className={`min-h-11 shrink-0 whitespace-nowrap px-4 font-sans text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent ${active === key ? 'bg-dark text-warm-100' : 'text-warm-700 hover:bg-warm-200'}`}>
@@ -38,7 +50,7 @@ export default function Portfolio() {
             ))}
           </div>
           <p aria-live="polite" className="font-sans text-xs tracking-widest text-warm-700">{String(visible.length).padStart(2, '0')} {t('개의 프로젝트', 'PROJECTS')}</p>
-        </div>
+        </div>}
         {visible.length ? (
           <div className="grid grid-cols-1 gap-x-8 gap-y-8 md:gap-y-12 md:grid-cols-2">
             {visible.map((project, index) => (
@@ -58,6 +70,17 @@ export default function Portfolio() {
             ))}
           </div>
         ) : <p className="py-20 text-center text-warm-700">{t('아직 등록된 시공 사례가 없습니다.', 'No projects in this category yet.')}</p>}
+        {preview && (
+          <div className="mt-12 flex justify-center md:mt-16">
+            <Link
+              href="/portfolio"
+              className="group inline-flex min-h-12 items-center gap-6 border border-dark px-8 font-sans text-sm text-dark transition-colors hover:bg-dark hover:text-warm-100 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+            >
+              {t(`전체 프로젝트 보기 (${portfolios.length})`, `View all projects (${portfolios.length})`)}
+              <span aria-hidden="true" className="transition-transform duration-500 group-hover:translate-x-1">→</span>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

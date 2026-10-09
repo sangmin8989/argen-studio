@@ -22,7 +22,7 @@ export default function PortfolioDetail({ project, images, prev, next }: Props) 
   return (
     <div className="bg-warm-100 pt-[76px]">
       <div className="max-w-[1320px] mx-auto px-[clamp(1.25rem,5vw,4rem)] pt-8 pb-4">
-        <Link href="/#portfolio" className="inline-flex items-center gap-2 font-sans text-sm text-warm-600 hover:text-accent transition-colors">
+        <Link href="/portfolio" className="inline-flex min-h-11 items-center gap-2 font-sans text-sm text-warm-700 hover:text-dark transition-colors">
           {t(dict['portfolio.back'].ko, dict['portfolio.back'].en)}
         </Link>
       </div>
@@ -51,7 +51,7 @@ export default function PortfolioDetail({ project, images, prev, next }: Props) 
               [t('사진', 'Photos'), `${project.imageCount}${t(dict['portfolio.photos'].ko, dict['portfolio.photos'].en)}`],
             ].map(([label, value]) => (
               <div key={label} className="border-b border-warm-200 pb-4">
-                <p className="font-sans text-xs tracking-[0.1em] uppercase text-warm-500 mb-1">{label}</p>
+                <p className="font-sans text-xs tracking-[0.1em] uppercase text-warm-700 mb-1">{label}</p>
                 <p className="font-sans text-base font-medium text-dark">{value}</p>
               </div>
             ))}
@@ -77,7 +77,7 @@ export default function PortfolioDetail({ project, images, prev, next }: Props) 
         <div className="mt-10 flex justify-between gap-4 pt-4">
           {prev ? (
             <Link href={`/portfolio/${prev.slug}`} className="group flex flex-col gap-1 hover:text-accent transition-colors">
-              <span className="font-sans text-xs text-warm-500 uppercase tracking-widest">
+              <span className="font-sans text-xs text-warm-700 uppercase tracking-widest">
                 {t(dict['portfolio.prev'].ko, dict['portfolio.prev'].en)}
               </span>
               <span className="font-serif text-lg font-semibold text-dark group-hover:text-accent transition-colors">
@@ -87,7 +87,7 @@ export default function PortfolioDetail({ project, images, prev, next }: Props) 
           ) : <div />}
           {next ? (
             <Link href={`/portfolio/${next.slug}`} className="group flex flex-col items-end gap-1 hover:text-accent transition-colors">
-              <span className="font-sans text-xs text-warm-500 uppercase tracking-widest">
+              <span className="font-sans text-xs text-warm-700 uppercase tracking-widest">
                 {t(dict['portfolio.next'].ko, dict['portfolio.next'].en)}
               </span>
               <span className="font-serif text-lg font-semibold text-dark group-hover:text-accent transition-colors">

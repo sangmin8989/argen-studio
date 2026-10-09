@@ -1,33 +1,36 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useLang } from '@/lib/i18n';
 import dict from '@/lib/dict';
 
-// 명품 토대: process/quote 제거. 본질만.
+// 명품 토대: process/quote 제거. 본질만. 각 메뉴는 별도 페이지로 열린다.
 const navLinks = [
-  { href: '#about', key: 'nav.about' as const },
-  { href: '#works', key: 'nav.portfolio' as const },
-  { href: '#services', key: 'nav.services' as const },
-  { href: '#contact', key: 'nav.contact' as const },
+  { href: '/studio', key: 'nav.about' as const },
+  { href: '/portfolio', key: 'nav.portfolio' as const },
+  { href: '/practice', key: 'nav.services' as const },
+  { href: '/inquiry', key: 'nav.contact' as const },
 ];
+
+// 맨 위가 어두운 배경(히어로처럼)인 페이지: 스크롤 전에는 밝은 글자색을 유지한다
+const darkTopPaths = ['/practice'];
 
 export default function Header() {
   const { lang, toggle, t } = useLang();
   const pathname = usePathname();
-  const router = useRouter();
   const isHome = pathname === '/';
+  const hasDarkTop = isHome || darkTopPaths.some((p) => pathname.startsWith(p));
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
-  const firstMenuItemRef = useRef<HTMLButtonElement>(null);
+  const firstMenuItemRef = useRef<HTMLAnchorElement>(null);
   const wasMenuOpenRef = useRef(false);
 
   // 밝은 배경 위에서는 어두운 글자색을 쓴다:
-  // 스크롤했을 때 / 히어로(어두운 배경)가 없는 상세 페이지 / 밝은 모바일 메뉴가 열렸을 때
-  const solid = scrolled || !isHome || menuOpen;
+  // 스크롤했을 때 / 어두운 상단(히어로)이 없는 페이지 / 밝은 모바일 메뉴가 열렸을 때
+  const solid = scrolled || !hasDarkTop || menuOpen;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80);
@@ -67,21 +70,12 @@ export default function Header() {
     };
   }, [menuOpen]);
 
-  const scrollTo = (href: string) => {
-    setMenuOpen(false);
-    if (href === '#') return;
-    // works 섹션은 portfolio id로 라우팅 (id 변경 안 했으므로 호환)
-    const target = href === '#works' ? '#portfolio' : href;
-    if (!isHome) {
-      router.push('/' + target);
-      return;
-    }
-    const el = document.querySelector(target);
-    if (!el) return;
-    const navH = 76;
-    const top = el.getBoundingClientRect().top + window.scrollY - navH;
-    window.scrollTo({ top, behavior: 'smooth' });
-  };
+  const isActive = (href: string) => pathname.startsWith(href);
+  // 현재 페이지의 메뉴는 또렷하게, 나머지는 한 톤 낮게
+  const navColor = (href: string) =>
+    solid
+      ? isActive(href) ? 'text-dark' : 'text-dark/70 hover:text-dark'
+      : isActive(href) ? 'text-warm-100' : 'text-warm-100/70 hover:text-warm-100';
 
   return (
     <>
@@ -95,7 +89,7 @@ export default function Header() {
       >
         <div className="max-w-[1320px] mx-auto px-[clamp(1.25rem,5vw,4rem)] h-full flex items-center justify-between">
           {/* Logo — 침묵의 워드마크. 강조 컬러 없음. */}
-          <Link href="/" className="flex items-baseline gap-0.5 group">
+          <Link href="/" aria-label="ARGEN STUDIO" className="flex items-baseline gap-0.5 py-3 group">
             <span
               className="font-serif text-[1.6rem] leading-none transition-colors duration-500"
               style={{ color: solid ? '#1C1917' : '#FAF8F5' }}
@@ -114,14 +108,13 @@ export default function Header() {
           <ul className="hidden lg:flex items-center gap-10">
             {navLinks.map((link) => (
               <li key={link.href}>
-                <button
-                  onClick={() => scrollTo(link.href)}
-                  className={`font-sans text-xs font-medium tracking-[0.15em] uppercase transition-colors duration-300 ${
-                    solid ? 'text-dark/70 hover:text-dark' : 'text-warm-100/70 hover:text-warm-100'
-                  }`}
+                <Link
+                  href={link.href}
+                  aria-current={isActive(link.href) ? 'page' : undefined}
+                  className={`font-sans font-medium uppercase transition-colors duration-300 ${lang === 'ko' ? 'text-[13px] tracking-[0.06em]' : 'text-xs tracking-[0.15em]'} ${navColor(link.href)}`}
                 >
                   {t(dict[link.key].ko, dict[link.key].en)}
-                </button>
+                </Link>
               </li>
             ))}
           </ul>
@@ -195,20 +188,22 @@ export default function Header() {
         <ul className="flex flex-col px-[clamp(1.5rem,8vw,3rem)] pt-[clamp(1rem,5svh,3rem)] gap-3">
           {navLinks.map((link, i) => (
             <li key={link.href}>
-              <button
+              <Link
                 ref={i === 0 ? firstMenuItemRef : undefined}
-                onClick={() => scrollTo(link.href)}
-                className="w-full text-left font-serif text-[clamp(1.5rem,5.5vw,2rem)] leading-[1.3] py-2 text-dark hover:text-warm-700 active:text-warm-700 transition-colors min-h-[48px]"
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+                className="flex w-full items-center text-left font-serif text-[clamp(1.5rem,5.5vw,2rem)] leading-[1.3] py-2 text-dark hover:text-warm-700 active:text-warm-700 transition-colors min-h-[48px]"
               >
                 {t(dict[link.key].ko, dict[link.key].en)}
-              </button>
+              </Link>
             </li>
           ))}
         </ul>
         <div className="px-[clamp(1.5rem,8vw,3rem)] pb-[max(3rem,env(safe-area-inset-bottom))]">
           <button
             onClick={toggle}
-            className="font-sans text-xs font-medium tracking-[0.2em] uppercase text-warm-600"
+            className="font-sans text-xs font-medium tracking-[0.2em] uppercase text-warm-700"
           >
             <span className={lang === 'ko' ? 'font-semibold text-dark' : ''}>한국어</span>
             <span className="mx-2 opacity-30">·</span>

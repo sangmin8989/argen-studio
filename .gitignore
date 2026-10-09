@@ -1,1 +1,11 @@
 .vercel
+
+# 원본 사진 보관함 (변환 전 원본, 사이트에 올리지 않음)
+sample-images/
+
+# 의존성 / 빌드 산출물
+node_modules/
+.next/
+
+# 로컬 작업 환경
+.claude/worktrees/

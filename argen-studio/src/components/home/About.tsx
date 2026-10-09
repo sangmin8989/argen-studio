@@ -68,7 +68,7 @@ export default function About() {
                 <h3 className="font-serif text-lg font-bold text-dark mb-2">
                   {t(dict[s.title].ko, dict[s.title].en)}
                 </h3>
-                <p className="font-sans text-sm text-warm-600 leading-relaxed">
+                <p className="font-sans text-sm text-warm-700 leading-relaxed">
                   {t(dict[s.desc].ko, dict[s.desc].en)}
                 </p>
               </motion.div>

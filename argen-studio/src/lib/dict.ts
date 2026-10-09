@@ -5,10 +5,10 @@
 
 const dict = {
   // Nav — 짧게. 명령형 X.
-  'nav.about': { ko: 'Studio', en: 'Studio' },
-  'nav.services': { ko: 'Practice', en: 'Practice' },
-  'nav.portfolio': { ko: 'Works', en: 'Works' },
-  'nav.contact': { ko: 'Inquiry', en: 'Inquiry' },
+  'nav.about': { ko: '회사소개', en: 'Studio' },
+  'nav.services': { ko: '시공 분야', en: 'Practice' },
+  'nav.portfolio': { ko: '시공 사례', en: 'Works' },
+  'nav.contact': { ko: '문의', en: 'Inquiry' },
 
   // Hero — 한 줄의 시
   'hero.eyebrow': { ko: 'ARGEN STUDIO', en: 'ARGEN STUDIO' },
@@ -18,7 +18,7 @@ const dict = {
   'hero.cta2': { ko: '작품 보기', en: 'View Works' },
 
   // About — Studio
-  'about.label': { ko: 'Studio', en: 'Studio' },
+  'about.label': { ko: '회사소개', en: 'Studio' },
   'about.headline1': { ko: '매장에서는 브랜드를,\n사무실에서는 일하는 방식을,', en: 'In a store, we see the brand.\nIn an office, the way people work.' },
   'about.headline2': { ko: '집에서는 사는 사람을 봅니다.', en: 'In a home, the people who live there.' },
   'about.desc': {
@@ -35,10 +35,10 @@ const dict = {
   'about.s4.desc': { ko: '디테일은 다음 사용자를 위한 배려입니다. 보이지 않는 곳까지.', en: 'Every detail is a kindness to the next user — including where no one looks.' },
 
   // Services — Practice (카테고리)
-  'services.label': { ko: 'Practice', en: 'Practice' },
+  'services.label': { ko: '시공 분야', en: 'Practice' },
   'services.title': { ko: '공간', en: 'Spaces' },
   'services.subtitle': { ko: '머무는 시간에 맞춰.', en: 'Designed for the time spent within.' },
-  'services.viewProjects': { ko: 'Works', en: 'Works' },
+  'services.viewProjects': { ko: '시공 사례 보기', en: 'Works' },
   'services.exterior': { ko: '건물 외장', en: 'Exterior' },
   'services.exteriorDesc': { ko: '거리에 면하는 첫 표정. 건물이 도시와 만나는 자리.', en: 'The first expression facing the street — where the building meets the city.' },
   'services.commercial': { ko: '상업 공간', en: 'Commercial' },
@@ -49,7 +49,7 @@ const dict = {
   'services.hospitalDesc': { ko: '몸을 맡기는 자리. 신뢰는 분위기에서 시작합니다.', en: 'Where the body is entrusted. Trust begins with atmosphere.' },
 
   // Portfolio — Works
-  'portfolio.label': { ko: 'Works', en: 'Works' },
+  'portfolio.label': { ko: '시공 사례', en: 'Works' },
   'portfolio.title': { ko: '선집', en: 'Selected' },
   'portfolio.subtitle': { ko: '아르젠이 머문 시간들.', en: 'Hours we have spent.' },
   'portfolio.all': { ko: '전체', en: 'All' },
@@ -58,7 +58,7 @@ const dict = {
   'portfolio.church': { ko: '교회', en: 'Sacred' },
   'portfolio.residential': { ko: '주거', en: 'Residential' },
   'portfolio.empty': { ko: '곧 더해집니다.', en: 'More to come.' },
-  'portfolio.back': { ko: '← Works', en: '← Works' },
+  'portfolio.back': { ko: '← 시공 사례', en: '← Works' },
   'portfolio.location': { ko: '위치', en: 'Location' },
   'portfolio.area': { ko: '면적', en: 'Area' },
   'portfolio.completed': { ko: '완공', en: 'Completed' },
@@ -69,10 +69,10 @@ const dict = {
   // Footer — 침묵
   'footer.desc1': { ko: '재료와 빛, 그리고', en: 'Material, light, and' },
   'footer.desc2': { ko: '머무는 사람을 위해.', en: 'those who stay.' },
-  'footer.menu': { ko: 'Index', en: 'Index' },
-  'footer.contactLabel': { ko: 'Contact', en: 'Contact' },
-  'footer.hq': { ko: 'Studio', en: 'Studio' },
-  'footer.showroom': { ko: 'Showroom', en: 'Showroom' },
+  'footer.menu': { ko: '메뉴', en: 'Index' },
+  'footer.contactLabel': { ko: '연락처', en: 'Contact' },
+  'footer.hq': { ko: '본사', en: 'Studio' },
+  'footer.showroom': { ko: '쇼룸', en: 'Showroom' },
 } as const;
 
 export type DictKey = keyof typeof dict;

@@ -219,13 +219,13 @@ export default function StoryGallery() {
             key={projectIdx}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
-            <p className="font-sans text-[10px] text-white/70 tracking-[0.15em] uppercase mb-1">
+            <p className="font-sans text-xs text-white/80 tracking-[0.12em] uppercase mb-1">
               {project.location[lang]} · {project.year}
             </p>
             <h3 className="font-serif text-xl font-bold text-white leading-tight">
               {project.title[lang]}
             </h3>
-            <p className="font-sans text-xs text-white/60 mt-2">
+            <p className="font-sans text-xs text-white/75 mt-2">
               {t('위로 스와이프하여 자세히 보기', 'Swipe up for details')}
             </p>
           </motion.div>
@@ -247,11 +247,11 @@ export default function StoryGallery() {
               <h3 className="font-serif text-lg font-bold text-dark mb-2">
                 {project.title[lang]}
               </h3>
-              <p className="font-sans text-sm text-warm-600 mb-1">
+              <p className="font-sans text-sm text-warm-700 mb-1">
                 {project.location[lang]} · {project.year}
               </p>
               {project.area && (
-                <p className="font-sans text-sm text-warm-600 mb-3">
+                <p className="font-sans text-sm text-warm-700 mb-3">
                   {t(`면적: ${project.area}`, `Area: ${project.area}`)}
                 </p>
               )}
@@ -263,7 +263,7 @@ export default function StoryGallery() {
               </Link>
               <button
                 onClick={() => setShowInfo(false)}
-                className="w-full py-3 border border-warm-300 text-warm-600 font-sans font-medium text-sm rounded-lg mt-2"
+                className="w-full py-3 border border-warm-300 text-warm-700 font-sans font-medium text-sm rounded-lg mt-2"
               >
                 {t('닫기', 'Close')}
               </button>

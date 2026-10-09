@@ -3,14 +3,14 @@
 import Link from 'next/link';
 import { useLang } from '@/lib/i18n';
 import dict from '@/lib/dict';
+import { company } from '@/lib/company';
 
-// about/portfolio/services 섹션은 홈에만 있으므로 상세 페이지에서도 동작하도록 '/' 를 붙인다.
-// (#contact 는 푸터 자신이라 모든 페이지에 존재)
+// 헤더 메뉴와 같은 별도 페이지로 연결한다.
 const menuLinks = [
-  { href: '/#about', key: 'nav.about' as const },
-  { href: '/#portfolio', key: 'nav.portfolio' as const },
-  { href: '/#services', key: 'nav.services' as const },
-  { href: '#contact', key: 'nav.contact' as const },
+  { href: '/studio', key: 'nav.about' as const },
+  { href: '/portfolio', key: 'nav.portfolio' as const },
+  { href: '/practice', key: 'nav.services' as const },
+  { href: '/inquiry', key: 'nav.contact' as const },
 ];
 
 export default function Footer() {
@@ -38,10 +38,11 @@ export default function Footer() {
             <p className="font-sans text-xs font-medium tracking-[0.15em] uppercase text-warm-500 mb-5">
               {t(dict['footer.menu'].ko, dict['footer.menu'].en)}
             </p>
-            <ul className="space-y-3">
+            <ul className="space-y-0 md:space-y-3">
               {menuLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="font-sans text-sm text-warm-400 hover:text-warm-200 transition-colors">
+                  {/* 모바일: 누르는 영역 44px 이상 */}
+                  <Link href={link.href} className="flex min-h-11 items-center font-sans text-sm text-warm-400 hover:text-warm-200 transition-colors md:inline-flex md:min-h-0">
                     {t(dict[link.key].ko, dict[link.key].en)}
                   </Link>
                 </li>
@@ -59,26 +60,34 @@ export default function Footer() {
                 {t(dict['footer.hq'].ko, dict['footer.hq'].en)}
               </p>
               <p className="font-sans text-sm text-warm-400">
-                {t('경기도 화성시 동탄첨단산업 1로 58, 퍼스트코리아 217호', '58 Dongtan Cheomdan-saneop 1-ro, Hwaseong-si, First Korea #217')}
+                {t(company.hq.ko, company.hq.en)}
               </p>
               <p className="font-sans text-xs font-medium text-warm-500 mt-3 mb-0.5">
                 {t(dict['footer.showroom'].ko, dict['footer.showroom'].en)}
               </p>
               <p className="font-sans text-sm text-warm-400">
-                {t('경기도 수원시 권선로 681, 아르젠 스튜디오', '681 Gwonseon-ro, Suwon-si, ARGEN Studio')}
+                {t(company.showroom.ko, company.showroom.en)}
               </p>
-              <a href="tel:031-8043-7966" className="block font-sans text-sm text-warm-400 hover:text-warm-200 transition-colors mt-3">
-                031-8043-7966
+              <a href={`tel:${company.phone}`} className="flex min-h-11 items-center font-sans text-sm text-warm-400 hover:text-warm-200 transition-colors md:mt-3 md:min-h-0">
+                {company.phone}
               </a>
             </address>
           </div>
         </div>
 
-        <div className="pt-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-          <p className="font-sans text-xs text-warm-600">
+        {/* 사업자 정보 — 건설업등록증 기준 */}
+        <p className="pt-8 font-sans text-xs leading-relaxed text-warm-500">
+          {t(
+            '주식회사 아르젠 · 대표 이성우 · 건설업(실내건축공사업) 등록번호 화성26-나-24',
+            'ARGEN Inc. · CEO Lee Seong-woo · Construction business (interior construction) Reg. No. Hwaseong 26-Na-24'
+          )}
+        </p>
+
+        <div className="pt-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <p className="font-sans text-xs text-warm-500">
             © {year} ARGEN STUDIO. All rights reserved.
           </p>
-          <a href="https://argen.co.kr" className="font-sans text-xs text-warm-600 hover:text-warm-400 transition-colors">
+          <a href="https://argen.co.kr" className="inline-flex min-h-11 items-center font-sans text-xs text-warm-500 hover:text-warm-300 transition-colors md:min-h-0">
             argen.co.kr
           </a>
         </div>

@@ -46,17 +46,17 @@ const seq = (count: number, ext: string): string[] =>
   Array.from({ length: count }, (_, i) => `${String(i + 1).padStart(2, '0')}.${ext}`);
 
 const starSportsExteriorImages = [
-  'night-corner-edited.png',
-  'night-front-edited.png',
-  'night-street-edited.png',
-  'night-facade-edited.png',
-  'night-pattern-edited.png',
-  'night-entry-edited.png',
-  'day-front-clean.png',
-  'day-close-edited.png',
-  'day-street-edited.png',
-  'day-corner-edited.png',
-  'day-dusk-corner-edited.png',
+  'night-corner-edited.webp',
+  'night-front-edited.webp',
+  'night-street-edited.webp',
+  'night-facade-edited.webp',
+  'night-pattern-edited.webp',
+  'night-entry-edited.webp',
+  'day-front-clean.webp',
+  'day-close-edited.webp',
+  'day-street-edited.webp',
+  'day-corner-edited.webp',
+  'day-dusk-corner-edited.webp',
 ];
 
 export const portfolios: PortfolioProject[] = [
@@ -73,8 +73,8 @@ export const portfolios: PortfolioProject[] = [
     completedAt: '2026-10',
     cardImageIndex: 1,
     images: [
-      'day-front-clean.png',
-      ...starSportsExteriorImages.filter((image) => image !== 'day-front-clean.png'),
+      'day-front-clean.webp',
+      ...starSportsExteriorImages.filter((image) => image !== 'day-front-clean.webp'),
       ...Array.from({ length: 8 }, (_, i) => `interior-${String(i + 7).padStart(2, '0')}.webp`),
     ],
     relatedProjectSlug: 'star-sports-exterior',

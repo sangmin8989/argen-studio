@@ -9,3 +9,6 @@ node_modules/
 
 # 로컬 작업 환경
 .claude/worktrees/
+
+# 작업 문서·시안·스크린샷·도구 (사이트와 무관한 로컬 보관함)
+_work/
